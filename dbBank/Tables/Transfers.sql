@@ -7,4 +7,3 @@
     account_number INT NOT NULL,
     FOREIGN KEY (id_account) REFERENCES Accounts(id_account)
 )
-
