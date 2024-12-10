@@ -1,0 +1,33 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35431.28
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TI-Projeto-Grupo7", "TI-Projeto-Grupo7.csproj", "{7380EF79-CF3C-4EAF-9937-E300810F7AB5}"
+EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "dbBank", "..\dbBank\dbBank.sqlproj", "{766D3E11-A792-4CFE-AF11-7378613FB43D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7380EF79-CF3C-4EAF-9937-E300810F7AB5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7380EF79-CF3C-4EAF-9937-E300810F7AB5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7380EF79-CF3C-4EAF-9937-E300810F7AB5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7380EF79-CF3C-4EAF-9937-E300810F7AB5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{766D3E11-A792-4CFE-AF11-7378613FB43D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{766D3E11-A792-4CFE-AF11-7378613FB43D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{766D3E11-A792-4CFE-AF11-7378613FB43D}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{766D3E11-A792-4CFE-AF11-7378613FB43D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{766D3E11-A792-4CFE-AF11-7378613FB43D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{766D3E11-A792-4CFE-AF11-7378613FB43D}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D7DB9388-1D1D-46C5-B3A6-C9E84E8B9DB8}
+	EndGlobalSection
+EndGlobal

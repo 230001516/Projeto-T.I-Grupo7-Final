@@ -1,0 +1,33 @@
+﻿@{
+    ViewData["Title"] = "Transfers";
+}
+
+<link href="~/css/Transferencias.css" rel="stylesheet"/>
+
+<header id="header">
+    <div class="container position-relative d-flex align-items-center justify-content-between">
+        <a href="@Url.Action("Index","Home")" class="logo d-flex align-items-center">
+            <img src="~/assets/img/logo2.png" alt="">
+            <h1 class="sitename">EvoluBank</h1>
+        </a>
+    </div>
+</header>
+
+<div class="transfer-container">
+    <h2>Transferência</h2>
+    <form method="post">
+        <div class="form-group">
+            <label for="conta-origem">Origin Account</label>
+            <input type="text" id="conta-origem" name="conta_origem" required>
+        </div>
+        <div class="form-group">
+            <label for="conta-destino">Destination account</label>
+            <input type="text" id="conta-destino" name="conta_destino" required>
+        </div>
+        <div class="form-group">
+            <label for="valor">Amount (EUR)</label>
+            <input type="number" id="valor" name="valor" min="0.01" step="5" placeholder="Amount to transfer" required>
+        </div>
+        <button type="submit" class="submit-btn">Transferir</button>
+    </form>
+</div>
