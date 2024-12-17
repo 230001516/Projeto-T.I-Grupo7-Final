@@ -4,7 +4,7 @@
     {
         public int id_developer {  get; set; }
 
-        public string name { get; set; }
+        public string devName { get; set; }
 
         public string description { get; set; }
 

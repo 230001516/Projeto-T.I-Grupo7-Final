@@ -19,8 +19,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Models\ViewsModels\Home\" />
-    <Folder Include="Models\ViewsModels\Accounts\" />
+    <Folder Include="Models\ViewsModels\Login\" />
+    <Folder Include="Models\ViewsModels\ForgotPassword\" />
+    <Folder Include="Models\ViewsModels\ResendEmail\" />
+    <Folder Include="Models\ViewsModels\Register\" />
     <Folder Include="Models\ViewsModels\Transfers\" />
   </ItemGroup>
 

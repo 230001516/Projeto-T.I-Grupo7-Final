@@ -2,6 +2,7 @@
     ViewData["Title"] = "Home Page";
 }
 
+@model TI_Projeto_Grupo7.Models.ViewsModels.Home.HomeIndexViewModel;
 
 <!DOCTYPE html>
 <html lang="en">
@@ -216,61 +217,26 @@
             <div class="container">
 
                 <div class="row gy-4">
+                    @foreach (var Developers in Model.dev){
 
-                    <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">
-                        <div class="team-member">
-                            <div class="member-img">
-                                <img src="assets/img/team/Diogao.jpg" class="img-fluid" alt="">
-                                <div class="social">
-                                    <a href=""><i class="bi bi-twitter-x"></i></a>
-                                    <a href=""><i class="bi bi-facebook"></i></a>
-                                    <a href="https://www.instagram.com/diogo_baltazar/"><i class="bi bi-instagram"></i></a>
-                                    <a href=""><i class="bi bi-linkedin"></i></a>
+                            <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">
+                                <div class="team-member">
+                                    <div class="member-img">
+                                        <img src="@Developers.image" class="img-fluid" alt="">
+                                        <div class="social">
+                                            <a href="@Developers.twitter"><i class="bi bi-twitter-x"></i></a>
+                                            <a href="@Developers.instagram"><i class="bi bi-instagram"></i></a>
+                                            <a href="@Developers.linkedin"><i class="bi bi-linkedin"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="member-info">
+                                        <h4>@Developers.devName</h4>
+                                        <span>@Developers.description</span>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="member-info">
-                                <h4>Diogo Baltazar</h4>
-                                <span>2nd-year student in the Bachelor's degree in Computer Science at the Polytechnic Institute of Santarém</span>
-                            </div>
-                        </div>
-                    </div><!-- End Team Member -->
 
-                    <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="300">
-                        <div class="team-member">
-                            <div class="member-img">
-                                <img src="assets/img/team/Filipao.jpg" class="img-fluid" alt="">
-                                <div class="social">
-                                    <a href=""><i class="bi bi-twitter-x"></i></a>
-                                    <a href=""><i class="bi bi-facebook"></i></a>
-                                    <a href="https://www.instagram.com/filipesilva007f/"><i class="bi bi-instagram"></i></a>
-                                    <a href=""><i class="bi bi-linkedin"></i></a>
-                                </div>
-                            </div>
-                            <div class="member-info">
-                                <h4>Filipe Silva</h4>
-                                <span>2nd-year student in the Bachelor's degree in Computer Science at the Polytechnic Institute of Santarém</span>
-                            </div>
-                        </div>
-                    </div><!-- End Team Member -->
-
-                    <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="400">
-                        <div class="team-member">
-                            <div class="member-img">
-                                <img src="assets/img/team/pedrao.jpg" class="img-fluid" alt="">
-                                <div class="social">
-                                    <a href=""><i class="bi bi-twitter-x"></i></a>
-                                    <a href=""><i class="bi bi-facebook"></i></a>
-                                    <a href="https://www.instagram.com/capitao.ramiro/"><i class="bi bi-instagram"></i></a>
-                                    <a href=""><i class="bi bi-linkedin"></i></a>
-                                </div>
-                            </div>
-                            <div class="member-info">
-                                <h4>Pedro Ramiro</h4>
-                                <span>2nd-year student in the Bachelor's degree in Computer Science at the Polytechnic Institute of Santarém</span>
-                            </div>
-                        </div>
-                    </div><!-- End Team Member -->
-
+                    }
                 </div>
 
             </div>
