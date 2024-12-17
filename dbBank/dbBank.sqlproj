@@ -57,15 +57,31 @@
   <ItemGroup>
     <Folder Include="Properties" />
     <Folder Include="Tables" />
+    <Folder Include="StoreProcedures" />
+    <Folder Include="StoreProcedures\Users" />
+    <Folder Include="StoreProcedures\Accounts" />
+    <Folder Include="StoreProcedures\Developers" />
   </ItemGroup>
   <ItemGroup>
-    <Build Include="Tables\Accounts_1.sql" />
-    <Build Include="Tables\Clients_1.sql" />
-    <Build Include="Tables\Developers_1.sql" />
-    <Build Include="Tables\PendingAccounts_1.sql" />
-    <Build Include="Tables\Support_1.sql" />
-    <Build Include="Tables\Transfers_1.sql" />
-    <Build Include="Tables\Users_1.sql" />
-    <Build Include="Tables\Workers_1.sql" />
+    <Build Include="Tables\Accounts.sql" />
+    <Build Include="Tables\Clients.sql" />
+    <Build Include="Tables\Developers.sql" />
+    <Build Include="Tables\PendingAccounts.sql" />
+    <Build Include="Tables\Support.sql" />
+    <Build Include="Tables\Transfers.sql" />
+    <Build Include="Tables\Users.sql" />
+    <Build Include="Tables\Workers.sql" />
+    <Build Include="StoreProcedures\Users\sp_users_delete.sql" />
+    <Build Include="StoreProcedures\Users\sp_users_insert.sql" />
+    <Build Include="StoreProcedures\Users\sp_users_get.sql" />
+    <Build Include="StoreProcedures\Users\sp_users_update.sql" />
+    <Build Include="StoreProcedures\Accounts\sp_accounts_delete.sql" />
+    <Build Include="StoreProcedures\Accounts\sp_accounts_get.sql" />
+    <Build Include="StoreProcedures\Accounts\sp_accounts_insert.sql" />
+    <Build Include="StoreProcedures\Accounts\sp_accounts_update.sql" />
+    <Build Include="StoreProcedures\Developers\sp_developers_delete.sql" />
+    <Build Include="StoreProcedures\Developers\sp_developers_get.sql" />
+    <Build Include="StoreProcedures\Developers\sp_developers_insert.sql" />
+    <Build Include="StoreProcedures\Developers\sp_developers_update.sql" />
   </ItemGroup>
 </Project>
