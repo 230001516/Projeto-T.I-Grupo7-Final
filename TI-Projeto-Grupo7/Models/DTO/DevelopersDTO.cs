@@ -1,6 +1,6 @@
 ﻿namespace TI_Projeto_Grupo7.Models.DTO
 {
-    public class Developers
+    public class DevelopersDTO
     {
         public int id_developer {  get; set; }
 

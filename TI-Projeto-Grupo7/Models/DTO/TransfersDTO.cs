@@ -2,7 +2,7 @@
 
 namespace TI_Projeto_Grupo7.Models.DTO
 {
-    public class Transfers
+    public class TransfersDTO
     {
 
         public int id_transfer { get; set; }

@@ -1,6 +1,6 @@
 ﻿namespace TI_Projeto_Grupo7.Models.DTO
 {
-    public class workers
+    public class workersDTO
     {
 
         public int id_user {  get; set; }

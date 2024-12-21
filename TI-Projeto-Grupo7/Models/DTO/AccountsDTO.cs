@@ -1,6 +1,6 @@
 ﻿namespace TI_Projeto_Grupo7.Models.DTO
 {
-    public class Accounts
+    public class AccountsDTO
     {
 
         public int id_account { get; set; }

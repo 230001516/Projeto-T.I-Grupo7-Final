@@ -1,6 +1,6 @@
 ﻿namespace TI_Projeto_Grupo7.Models.DTO
 {
-    public class Support
+    public class SupportDTO
     {
 
         public int id_ticket { get; set; }
