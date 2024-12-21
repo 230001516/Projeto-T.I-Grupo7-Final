@@ -24,6 +24,7 @@
     <Folder Include="Models\ViewsModels\ResendEmail\" />
     <Folder Include="Models\ViewsModels\Register\" />
     <Folder Include="Models\ViewsModels\Transfers\" />
+    <Folder Include="Services\" />
   </ItemGroup>
 
 </Project>
