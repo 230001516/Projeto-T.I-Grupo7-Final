@@ -1,4 +1,5 @@
 ﻿using Dapper;
+using Humanizer;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Options;
 using System.Data;
@@ -29,6 +30,7 @@ namespace TI_Projeto_Grupo7.Services
             using (IDbConnection conn = new SqlConnection(_myOptions.ConnString))
             {
                 listd = conn.Query<DevelopersDTO>(Constants.SP_DEVELOPERS_GET, parameters, commandType: CommandType.StoredProcedure).ToList();
+                
             }
 
             return new ExecutionResultFactory<List<DevelopersDTO>>().GetSuccessExecutionResult(listd, string.Empty);
