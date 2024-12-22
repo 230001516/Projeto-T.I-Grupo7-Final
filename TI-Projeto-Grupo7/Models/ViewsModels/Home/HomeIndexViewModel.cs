@@ -5,8 +5,8 @@ namespace TI_Projeto_Grupo7.Models.ViewsModels.Home
     public class HomeIndexViewModel
     {
 
-        public List<Developers> dev { get; set; }
+        public List<DevelopersDTO> dev { get; set; }
 
-        public List<Support> supp { get; set; }
+        public List<SupportDTO> supp { get; set; }
     }
 }
