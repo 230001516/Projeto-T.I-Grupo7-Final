@@ -2,9 +2,9 @@
 
 namespace TI_Projeto_Grupo7.Controllers
 {
-    public class SignIn : Controller
+    public class Register : Controller
     {
-        public IActionResult Index()
+        public IActionResult Register()
         {
             return View();
         }
