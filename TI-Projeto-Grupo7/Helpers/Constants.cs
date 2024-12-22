@@ -17,5 +17,10 @@
         public const string SP_DEVELOPERS_GET = "sp_developers_get";
         public const string SP_DEVELOPERS_DELETE = "sp_developers_delete";
         public const string SP_DEVELOPERS_UPDATE = "sp_developers_update";
+
+        public const string SP_SUPPORT_INSERT = "sp_support_insert";
+        public const string SP_SUPPORT_GET = "sp_support_get";
+        public const string SP_SUPPORT_DELETE = "sp_support_delete";
+        public const string SP_SUPPORT_UPDATE = "sp_support_update";
     }
 }
