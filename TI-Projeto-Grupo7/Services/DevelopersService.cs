@@ -22,10 +22,8 @@ namespace TI_Projeto_Grupo7.Services
             List<DevelopersDTO> listd = new List<DevelopersDTO>();
 
             DynamicParameters parameters = new DynamicParameters();
-            if (id_developer != null)
-            {
-                parameters.Add("@id_developer", id_developer, DbType.Int32, ParameterDirection.Input);
-            }
+            parameters.Add("@id_developer", id_developer, DbType.Int32, ParameterDirection.Input);
+
 
             using (IDbConnection conn = new SqlConnection(_myOptions.ConnString))
             {

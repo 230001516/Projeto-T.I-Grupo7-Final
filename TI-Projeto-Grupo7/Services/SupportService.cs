@@ -21,10 +21,8 @@ namespace TI_Projeto_Grupo7.Services
             List<SupportDTO> lists = new List<SupportDTO>();
 
             DynamicParameters parameters = new DynamicParameters();
-            if (id_ticket != null)
-            {
-                parameters.Add("@id_ticket", id_ticket, DbType.Int32, ParameterDirection.Input);
-            }
+            parameters.Add("@id_ticket", id_ticket, DbType.Int32, ParameterDirection.Input);
+
 
             using (IDbConnection conn = new SqlConnection(_myOptions.ConnString))
             {

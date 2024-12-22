@@ -21,10 +21,8 @@ namespace TI_Projeto_Grupo7.Services
             List<AccountsDTO> lista = new List<AccountsDTO>();
 
             DynamicParameters parameters = new DynamicParameters();
-            if (id_account != null)
-            {
-                parameters.Add("@id_account", id_account, DbType.Int32, ParameterDirection.Input);
-            }
+            parameters.Add("@id_account", id_account, DbType.Int32, ParameterDirection.Input);
+
 
             using (IDbConnection conn = new SqlConnection(_myOptions.ConnString))
             {

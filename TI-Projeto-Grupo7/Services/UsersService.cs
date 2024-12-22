@@ -21,10 +21,7 @@ namespace TI_Projeto_Grupo7.Services
             List<UsersDTO> listu = new List<UsersDTO>();
 
             DynamicParameters parameters = new DynamicParameters();
-            if (id_user != null)
-            {
-                parameters.Add("@id_user", id_user, DbType.Int32, ParameterDirection.Input);
-            }
+            parameters.Add("@id_user", id_user, DbType.Int32, ParameterDirection.Input);
 
             using (IDbConnection conn = new SqlConnection(_myOptions.ConnString))
             {
