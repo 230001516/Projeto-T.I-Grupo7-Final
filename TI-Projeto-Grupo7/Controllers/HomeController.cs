@@ -66,6 +66,11 @@ namespace LojaOnline.Controllers
             DevelopersDTO developer = _developersService.Get(id_developer).Results.FirstOrDefault();
             model.id_developer = developer.id_developer;
             model.devName = developer.devName;
+            model.devDescription = developer.devDescription;
+            model.twitter = developer.twitter;
+            model.instagram = developer.instagram;
+            model.linkedin = developer.linkedin;
+            model.devImage = developer.devImage;
 
             return View(model);
         }

@@ -1,15 +1,15 @@
 ﻿CREATE PROCEDURE [dbo].[sp_developers_update]
     @id_developer INT,
 	@devName VARCHAR(50),
-    @description VARCHAR(255),
+    @devDescription VARCHAR(255),
     @twitter VARCHAR(100),
     @instagram VARCHAR(100),
     @linkedin VARCHAR(100),
-    @image VARCHAR(100)
+    @devImage VARCHAR(100)
 
 AS
 BEGIN
     UPDATE dbo.Developers
-    SET devName = @devName, [description] = @description, [twitter] = @twitter, [instagram] = @instagram, [linkedin] = @linkedin, [image] = @image
+    SET devName = @devName, [devDescription] = @devDescription, [twitter] = @twitter, [instagram] = @instagram, [linkedin] = @linkedin, [devImage] = @devImage
     WHERE [id_developer] = @id_developer
 END

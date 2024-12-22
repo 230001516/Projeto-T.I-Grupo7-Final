@@ -41,11 +41,11 @@ namespace TI_Projeto_Grupo7.Services
 
             DynamicParameters parameters = new DynamicParameters();
             parameters.Add("@devName", dto.devName, DbType.String, ParameterDirection.Input);
-            parameters.Add("@description", dto.description, DbType.String, ParameterDirection.Input);
+            parameters.Add("@description", dto.devDescription, DbType.String, ParameterDirection.Input);
             parameters.Add("@twitter", dto.twitter, DbType.String, ParameterDirection.Input);
             parameters.Add("@instagram", dto.instagram, DbType.String, ParameterDirection.Input);
             parameters.Add("@linkedin", dto.linkedin, DbType.String, ParameterDirection.Input);
-            parameters.Add("@image", dto.image, DbType.String, ParameterDirection.Input);
+            parameters.Add("@image", dto.devImage, DbType.String, ParameterDirection.Input);
 
 
             using (IDbConnection conn = new SqlConnection(_myOptions.ConnString))
@@ -63,11 +63,11 @@ namespace TI_Projeto_Grupo7.Services
             DynamicParameters parameters = new DynamicParameters();
             parameters.Add("@id_developer", dto.id_developer, DbType.Int32, ParameterDirection.Input);
             parameters.Add("@devName", dto.devName, DbType.String, ParameterDirection.Input);
-            parameters.Add("@description", dto.description, DbType.String, ParameterDirection.Input);
+            parameters.Add("@description", dto.devDescription, DbType.String, ParameterDirection.Input);
             parameters.Add("@twitter", dto.twitter, DbType.String, ParameterDirection.Input);
             parameters.Add("@instagram", dto.instagram, DbType.String, ParameterDirection.Input);
             parameters.Add("@linkedin", dto.linkedin, DbType.String, ParameterDirection.Input);
-            parameters.Add("@image", dto.image, DbType.String, ParameterDirection.Input);
+            parameters.Add("@image", dto.devImage, DbType.String, ParameterDirection.Input);
 
             using (IDbConnection conn = new SqlConnection(_myOptions.ConnString))
             {

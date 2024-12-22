@@ -12,7 +12,7 @@ namespace TI_Projeto_Grupo7.Models.ViewsModels.Home
         public string devName { get; set; }
 
         [Required]
-        public string description { get; set; }
+        public string devDescription { get; set; }
 
         public string twitter { get; set; }
 
@@ -21,7 +21,7 @@ namespace TI_Projeto_Grupo7.Models.ViewsModels.Home
         public string linkedin { get; set; }
 
         [Required]
-        public string image { get; set; }
+        public string devImage { get; set; }
 
 
         // Support
