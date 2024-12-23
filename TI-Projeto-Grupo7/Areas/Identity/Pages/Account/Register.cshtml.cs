@@ -19,6 +19,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 using TI_Grupo7.Areas.Identity.Data;
+using TI_Projeto_Grupo7.Helpers;
 
 namespace TI_Grupo7.Areas.Identity.Pages.Account
 {
@@ -85,9 +86,9 @@ namespace TI_Grupo7.Areas.Identity.Pages.Account
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
             [Required]
-            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 10)]
             [DataType(DataType.Password)]
             [Display(Name = "Password")]
+            [PasswordComplexity] // Custom Class from Helpers
             public string Password { get; set; }
 
             /// <summary>
