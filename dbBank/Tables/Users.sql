@@ -1,7 +1,7 @@
 ﻿CREATE TABLE [dbo].[Users]
 (
-	id_user INT PRIMARY KEY,
-    is_worker INT NOT NULL,
+	id_user INT IDENTITY(1,1) PRIMARY KEY,
+    is_worker INT,
     firstname VARCHAR(50) NOT NULL,
     surname VARCHAR(50) NOT NULL,
     nif INT UNIQUE NOT NULL,

@@ -1,6 +1,6 @@
 ﻿CREATE TABLE [dbo].[PendingAccounts]
 (
-	id_accountPending INT PRIMARY KEY,
+	id_accountPending INT IDENTITY(1,1) PRIMARY KEY,
     id_user INT NOT NULL,
     account_state INT NOT NULL,
     id_worker INT NOT NULL,

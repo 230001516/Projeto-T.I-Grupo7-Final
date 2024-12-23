@@ -1,6 +1,6 @@
 ﻿CREATE TABLE [dbo].[Accounts]
 (
-	id_account INT PRIMARY KEY,
+	id_account INT IDENTITY(1,1) PRIMARY KEY,
     id_pendingAccount INT NOT NULL,
     balance DECIMAL(10, 2) NOT NULL,
     account_number INT NOT NULL,

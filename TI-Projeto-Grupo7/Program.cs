@@ -4,6 +4,8 @@ using Application.Data;
 using TI_Grupo7.Areas.Identity.Data;
 using TI_Projeto_Grupo7.Helpers;
 using Microsoft.Extensions.Options;
+using TI_Projeto_Grupo7.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("BankDbContextConnection") ?? throw new InvalidOperationException("Connection string 'BankDbContextConnection' not found.");
 
@@ -12,6 +14,7 @@ builder.Services.AddDbContext<BankDbContext>(options => options.UseSqlServer(con
 builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<BankDbContext>();
 
 // Add services to the container.
+builder.Services.AddScoped<UsersService>();
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
 builder.Services.AddHttpContextAccessor();
@@ -20,14 +23,6 @@ builder.Services.Configure<MyOptions>(myOptions =>
 {
     myOptions.ConnString = connectionString;
 });
-
-/* builder.Services.Configure<IdentityOptions>(myOptions =>
-{
-    myOptions.Password.RequireNonAlphanumeric = true; // Enforces at least one special character
-    myOptions.Password.RequireDigit = true;          // Enforce at least one digit
-    myOptions.Password.RequireUppercase = true;      // Enforce at least one uppercase letter
-    myOptions.Password.RequireLowercase = true;      // Enforce at least one lowercase letter
-}); */
 
 var app = builder.Build();
 

@@ -1,6 +1,6 @@
 ﻿CREATE TABLE [dbo].[Transfers]
 (
-	id_transfers INT PRIMARY KEY,
+	id_transfers INT IDENTITY(1,1) PRIMARY KEY,
     id_account INT NOT NULL,
     transfer_date DATE NOT NULL,
     transfer_value DECIMAL(10,2) NOT NULL,

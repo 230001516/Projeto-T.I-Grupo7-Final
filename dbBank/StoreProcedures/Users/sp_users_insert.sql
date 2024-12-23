@@ -1,5 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[sp_clients_insert]
-	@is_worker INT,
+﻿CREATE PROCEDURE [dbo].[sp_users_insert]
 	@firstname VARCHAR(50),
     @surname VARCHAR(50),
     @nif INT,
@@ -10,6 +9,6 @@
 
 AS
 BEGIN
-    INSERT INTO dbo.Users([is_worker], [firstname], [surname], [nif], [user_address], [email], [phone_number], [password])
-        VALUES (@is_worker, @firstname, @surname, @nif, @user_address, @email, @phone_number, @password)
-    END
+    INSERT INTO dbo.Users([firstname], [surname], [nif], [user_address], [email], [phone_number], [password])
+        VALUES (@firstname, @surname, @nif, @user_address, @email, @phone_number, @password)
+END

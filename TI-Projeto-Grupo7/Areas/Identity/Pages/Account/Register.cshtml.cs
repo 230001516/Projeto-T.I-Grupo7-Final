@@ -20,6 +20,8 @@ using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 using TI_Grupo7.Areas.Identity.Data;
 using TI_Projeto_Grupo7.Helpers;
+using TI_Projeto_Grupo7.Models.DTO;
+using TI_Projeto_Grupo7.Services;
 
 namespace TI_Grupo7.Areas.Identity.Pages.Account
 {
@@ -31,13 +33,15 @@ namespace TI_Grupo7.Areas.Identity.Pages.Account
         private readonly IUserEmailStore<ApplicationUser> _emailStore;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
+        private readonly UsersService _usersService;
 
         public RegisterModel(
             UserManager<ApplicationUser> userManager,
             IUserStore<ApplicationUser> userStore,
             SignInManager<ApplicationUser> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            UsersService usersService)
         {
             _userManager = userManager;
             _userStore = userStore;
@@ -45,6 +49,7 @@ namespace TI_Grupo7.Areas.Identity.Pages.Account
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
+            _usersService = usersService;
         }
 
         /// <summary>
@@ -88,7 +93,7 @@ namespace TI_Grupo7.Areas.Identity.Pages.Account
             [Required]
             [DataType(DataType.Password)]
             [Display(Name = "Password")]
-            [PasswordComplexity] // Custom Class from Helpers
+            [PasswordComplexity] // Custom Class from Helpers 
             public string Password { get; set; }
 
             /// <summary>
@@ -101,6 +106,7 @@ namespace TI_Grupo7.Areas.Identity.Pages.Account
             public string ConfirmPassword { get; set; }
 
             [Required]
+            [NifValidator]
             [Display(Name = "NIF")]
             public int NIF { get; set; }
 
@@ -144,6 +150,26 @@ namespace TI_Grupo7.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
+
+                    var userDto = new UsersDTO
+                    {
+                        firstname = Input.FirstName,
+                        surname = Input.Surname,
+                        nif = Input.NIF,
+                        user_address = Input.Address,
+                        email = Input.Email,
+                        phone_number = Input.PhoneNumber, 
+                        password = Input.Password 
+                    };
+
+                    // Insert user data using UsersService
+                    var insertResult = await _usersService.InsertAsync(userDto, userDto.email);
+
+                    if (!insertResult.Status)
+                    {
+                        ModelState.AddModelError(string.Empty, "Failed to insert user into the database.");
+                        return Page();
+                    }
 
                     var userId = await _userManager.GetUserIdAsync(user);
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
