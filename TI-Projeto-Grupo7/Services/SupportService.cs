@@ -38,7 +38,7 @@ namespace TI_Projeto_Grupo7.Services
             int result;
 
             DynamicParameters parameters = new DynamicParameters();
-            parameters.Add("@supName", dto.supName, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("@supName", dto.supName, DbType.String, ParameterDirection.Input);
             parameters.Add("@email", dto.email, DbType.String, ParameterDirection.Input);
             parameters.Add("@subject", dto.subject, DbType.String, ParameterDirection.Input);
             parameters.Add("@message", dto.message, DbType.String, ParameterDirection.Input);
@@ -58,8 +58,8 @@ namespace TI_Projeto_Grupo7.Services
 
             DynamicParameters parameters = new DynamicParameters();
             parameters.Add("@id_ticket", dto.id_ticket, DbType.Int32, ParameterDirection.Input);
-            parameters.Add("@id_user", dto.id_user, DbType.String, ParameterDirection.Input);
-            parameters.Add("@supName", dto.supName, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("@id_user", dto.id_user, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("@supName", dto.supName, DbType.String, ParameterDirection.Input);
             parameters.Add("@email", dto.email, DbType.String, ParameterDirection.Input);
             parameters.Add("@subject", dto.subject, DbType.String, ParameterDirection.Input);
             parameters.Add("@message", dto.message, DbType.String, ParameterDirection.Input);

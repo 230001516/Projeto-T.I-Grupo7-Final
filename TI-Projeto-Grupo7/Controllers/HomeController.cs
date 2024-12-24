@@ -6,8 +6,9 @@ using TI_Projeto_Grupo7.Models.DTO;
 using TI_Projeto_Grupo7.Models.ViewsModels.Home;
 using TI_Projeto_Grupo7.Services;
 using System.Security.Claims;
+using Humanizer;
 
-namespace LojaOnline.Controllers
+namespace TI_Projeto_Grupo7.Controllers
 {
     public class HomeController : Controller
     {
@@ -53,12 +54,16 @@ namespace LojaOnline.Controllers
         {
             SupportDTO dto = new SupportDTO();
             dto.supName = model.supName;
+            dto.email = model.email;
+            dto.message = model.message;
+            dto.subject = model.subject;
 
             ExecutionResult<SupportDTO> result = _supportService.Insert(dto, GetUsername());
 
             return View("Index", GetIndexViewModel());
         }
 
+        [HttpPost]
         public IActionResult EditDev(int id_developer)
         {
             HomeEditViewModel model = new HomeEditViewModel();
@@ -75,6 +80,7 @@ namespace LojaOnline.Controllers
             return View(model);
         }
 
+        [HttpPost]
         public IActionResult EditSup(int id_ticket)
         {
             HomeEditViewModel model = new HomeEditViewModel();
@@ -82,6 +88,9 @@ namespace LojaOnline.Controllers
             SupportDTO support = _supportService.Get(id_ticket).Results.FirstOrDefault();
             model.id_ticket = support.id_ticket;
             model.supName = support.supName;
+            model.email = support.email;
+            model.message = support.message;
+            model.subject= support.subject;
 
             return View(model);
         }
