@@ -10,10 +10,13 @@ namespace TI_Projeto_Grupo7.Services
     public class UsersService
     {
         private readonly MyOptions _myOptions;
+        private readonly ILogger<UsersService> _logger;
 
-        public UsersService(IOptions<MyOptions> myOptions)
+        public UsersService(IOptions<MyOptions> myOptions, ILogger<UsersService> logger)
         {
             _myOptions = myOptions.Value;
+            _logger = logger;
+
         }
 
         public ExecutionResult<List<UsersDTO>> Get(int? id_user = null)
@@ -51,49 +54,78 @@ namespace TI_Projeto_Grupo7.Services
 
         public ExecutionResult<UsersDTO> Insert(UsersDTO dto, string user)
         {
-            int result;
+            try{
 
-            DynamicParameters parameters = new DynamicParameters();
-            parameters.Add("@firstname", dto.firstname, DbType.String, ParameterDirection.Input);
-            parameters.Add("@surname", dto.surname, DbType.String, ParameterDirection.Input);
-            parameters.Add("@nif", dto.nif, DbType.Int32, ParameterDirection.Input);
-            parameters.Add("@user_address", dto.user_address, DbType.String, ParameterDirection.Input);
-            parameters.Add("@email", dto.email, DbType.String, ParameterDirection.Input);
-            parameters.Add("@phone_number", dto.phone_number, DbType.Int32, ParameterDirection.Input);
-            parameters.Add("@password", dto.password, DbType.String, ParameterDirection.Input);
+                int result;
+
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("@firstname", dto.firstname, DbType.String, ParameterDirection.Input);
+                parameters.Add("@surname", dto.surname, DbType.String, ParameterDirection.Input);
+                parameters.Add("@nif", dto.nif, DbType.Int32, ParameterDirection.Input);
+                parameters.Add("@user_address", dto.user_address, DbType.String, ParameterDirection.Input);
+                parameters.Add("@email", dto.email, DbType.String, ParameterDirection.Input);
+                parameters.Add("@phone_number", dto.phone_number, DbType.Int32, ParameterDirection.Input);
+                parameters.Add("@password", dto.password, DbType.String, ParameterDirection.Input);
 
 
-            using (IDbConnection conn = new SqlConnection(_myOptions.ConnString))
-            {
-                result = conn.Execute(Constants.SP_USERS_INSERT, parameters, commandType: CommandType.StoredProcedure);
+                using (IDbConnection conn = new SqlConnection(_myOptions.ConnString)){
+
+                    result = conn.Execute(Constants.SP_USERS_INSERT, parameters, commandType: CommandType.StoredProcedure);
+
+                }
+                return new ExecutionResultFactory<UsersDTO>().GetSuccessExecutionResult(dto, string.Empty);
+
+            }catch (SqlException ex){
+
+                _logger.LogError(ex, "An error occurred while fetching users.");
+                return new ExecutionResultFactory<UsersDTO>().GetFailedExecutionResult("Failed to retrieve users.");
+
+            }catch (Exception ex){
+
+                _logger.LogError(ex, "An unexpected error occurred.");
+                return new ExecutionResultFactory<UsersDTO>().GetFailedExecutionResult("An unexpected error occurred.");
+
             }
-
-            return new ExecutionResultFactory<UsersDTO>().GetSuccessExecutionResult(dto, string.Empty);
         }
 
-        public async Task<ExecutionResult<UsersDTO>> InsertAsync(UsersDTO dto, string user)
-        {
-            int result;
+        public async Task<ExecutionResult<UsersDTO>> InsertAsync(UsersDTO dto, string user){
 
-            DynamicParameters parameters = new DynamicParameters();
-            parameters.Add("@firstname", dto.firstname, DbType.String, ParameterDirection.Input);
-            parameters.Add("@surname", dto.surname, DbType.String, ParameterDirection.Input);
-            parameters.Add("@nif", dto.nif, DbType.Int32, ParameterDirection.Input);
-            parameters.Add("@user_address", dto.user_address, DbType.String, ParameterDirection.Input);
-            parameters.Add("@email", dto.email, DbType.String, ParameterDirection.Input);
-            parameters.Add("@phone_number", dto.phone_number, DbType.Int32, ParameterDirection.Input);
-            parameters.Add("@password", dto.password, DbType.String, ParameterDirection.Input);
+            try{
 
-            using (IDbConnection conn = new SqlConnection(_myOptions.ConnString))
-            {
-                result = await conn.ExecuteAsync(Constants.SP_USERS_INSERT, parameters, commandType: CommandType.StoredProcedure);
+                int result;
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("@firstname", dto.firstname, DbType.String, ParameterDirection.Input);
+                parameters.Add("@surname", dto.surname, DbType.String, ParameterDirection.Input);
+                parameters.Add("@nif", dto.nif, DbType.Int32, ParameterDirection.Input);
+                parameters.Add("@user_address", dto.user_address, DbType.String, ParameterDirection.Input);
+                parameters.Add("@email", dto.email, DbType.String, ParameterDirection.Input);
+                parameters.Add("@phone_number", dto.phone_number, DbType.Int32, ParameterDirection.Input);
+                parameters.Add("@password", dto.password, DbType.String, ParameterDirection.Input);
+
+                using (IDbConnection conn = new SqlConnection(_myOptions.ConnString)){
+
+                    result = await conn.ExecuteAsync(Constants.SP_USERS_INSERT, parameters, commandType: CommandType.StoredProcedure);
+
+                }
+
+                return new ExecutionResultFactory<UsersDTO>().GetSuccessExecutionResult(dto, string.Empty);
+
+            }catch (SqlException ex){
+
+                _logger.LogError(ex, "An error occurred while inserting a user.");
+
+                return new ExecutionResultFactory<UsersDTO>().GetFailedExecutionResult("Failed to insert the user.");
+
+            }catch (Exception ex){
+
+                _logger.LogError(ex, "An unexpected error occurred.");
+                return new ExecutionResultFactory<UsersDTO>().GetFailedExecutionResult("An unexpected error occurred.");
+
             }
-
-            return new ExecutionResultFactory<UsersDTO>().GetSuccessExecutionResult(dto, string.Empty);
         }
 
-        public ExecutionResult<UsersDTO> Update(UsersDTO dto, string user)
-        {
+        public ExecutionResult<UsersDTO> Update(UsersDTO dto, string user){
+            
             int result;
 
             DynamicParameters parameters = new DynamicParameters();

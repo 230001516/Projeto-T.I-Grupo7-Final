@@ -62,34 +62,8 @@
                         <li><a href="#team">Team</a></li>
                         <li><a href="#faq">FAQ's</a></li>
                         <li><a href="#contact">Support</a></li>
-                        
-
-                        @if (User.Identity.IsAuthenticated)
-                        {
-                            <!-- Logged-In User Options -->
-                            <li class="dropdown">
-                                <a href="#">
-                                    <img src="~/assets/img/user-icon.png" class="rounded-circle" alt="User Icon" width="30">
-                                    @User.Identity.Name
-                                    <i class="bi bi-chevron-down"></i>
-                                </a>
-                                <ul>
-                                    <li><a href="@Url.Action("Transferencia","Transferencia")">Transfers</a></li>
-                                    <li><a href="/Identity/Account/Manage">Profile</a></li>
-                                    <li>
-                                        <form action="/Identity/Account/Logout" method="post" style="margin: 0;">
-                                            @Html.AntiForgeryToken()  <!-- Proteção contra cross site request forgery -->
-                                            <button class="dropdown-item" type="submit">Logout</button>
-                                        </form>
-                                    </li>
-                                </ul>
-                            </li>
-                        }
-                        else
-                        {
-                            <!-- Guest Options -->
-                            <li><a href="Identity/Account/Login">Sign In</a></li>
-                        }
+                        <li><a href="@Url.Action("Transferencia","Transferencia")">Transfers</a></li>
+                        <li><a href="Identity/Account/Login">Sign In</a></li>
                     </ul>
                     <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
                 </nav>
@@ -112,7 +86,7 @@
                 <div class="welcome position-relative" data-aos="fade-down" data-aos-delay="100">
                     <h2>Welcome to Our Bank</h2>
                     <p>
-                        We are committed to providing exceptional financial solutions tailored to your needs. 
+                        We are committed to providing exceptional financial solutions tailored to your needs.
                         Our experienced team leverages innovation and security to empower your financial future.
                     </p>
                 </div><!-- End Welcome -->
@@ -122,8 +96,8 @@
                         <div class="why-box" data-aos="zoom-out" data-aos-delay="200">
                             <h3>Why Choose Our Services?</h3>
                             <p>
-                                We offer personalized banking solutions to meet your 
-                                financial needs. With security, innovation, and a dedicated team, 
+                                We offer personalized banking solutions to meet your
+                                financial needs. With security, innovation, and a dedicated team,
                                 we ensure you have the best options for your financial future.
                             </p>
                             <div class="text-center">
@@ -141,7 +115,7 @@
                                         <i class="bi bi-clipboard-data"></i>
                                         <h4>Security in Every Transaction</h4>
                                         <p>
-                                            Your assets deserve maximum protection. 
+                                            Your assets deserve maximum protection.
                                             We provide state-of-the-art security and 24-hour monitoring for all your transactions.
                                         </p>
                                     </div>
@@ -152,7 +126,7 @@
                                         <i class="bi bi-gem"></i>
                                         <h4>Personalized Financial Consulting</h4>
                                         <p>
-                                            Our team of specialists is ready to craft a financial 
+                                            Our team of specialists is ready to craft a financial
                                             plan that maximizes your returns and minimizes risks.
                                         </p>
                                     </div>
@@ -163,7 +137,7 @@
                                         <i class="bi bi-inboxes"></i>
                                         <h4>Convenience for Your Daily Life</h4>
                                         <p>
-                                            Enjoy fast and easy transactions with our app and online services, 
+                                            Enjoy fast and easy transactions with our app and online services,
                                             ensuring a streamlined financial experience
                                         </p>
                                     </div>
@@ -242,7 +216,7 @@
 
             <div class="container">
 
-              <div class="row gy-4">
+                <div class="row gy-4">
                     @if (Model.dev != null && Model.dev.Any())
                     {
                         @foreach (var Developers in Model.dev)
@@ -274,7 +248,6 @@
             </div>
 
         </section><!-- /Team Section -->
-       
         <!-- Faq Section -->
         <section id="faq" class="faq section light-background">
 
