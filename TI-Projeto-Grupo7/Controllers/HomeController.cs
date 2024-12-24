@@ -6,9 +6,8 @@ using TI_Projeto_Grupo7.Models.DTO;
 using TI_Projeto_Grupo7.Models.ViewsModels.Home;
 using TI_Projeto_Grupo7.Services;
 using System.Security.Claims;
-using Humanizer;
 
-namespace TI_Projeto_Grupo7.Controllers
+namespace LojaOnline.Controllers
 {
     public class HomeController : Controller
     {
@@ -52,18 +51,17 @@ namespace TI_Projeto_Grupo7.Controllers
         [HttpPost]
         public IActionResult CreateSup(HomeCreateViewModel model)
         {
-            SupportDTO dto = new SupportDTO();
-            dto.supName = model.supName;
-            dto.email = model.email;
-            dto.message = model.message;
-            dto.subject = model.subject;
-
+            SupportDTO dto = new SupportDTO() {
+                supName = model.supName,
+                email = model.email,
+                subject = model.subject,
+                message = model.message
+            };
             ExecutionResult<SupportDTO> result = _supportService.Insert(dto, GetUsername());
 
-            return View("Index", GetIndexViewModel());
+            return RedirectToAction("Index");
         }
 
-        [HttpPost]
         public IActionResult EditDev(int id_developer)
         {
             HomeEditViewModel model = new HomeEditViewModel();
@@ -80,7 +78,6 @@ namespace TI_Projeto_Grupo7.Controllers
             return View(model);
         }
 
-        [HttpPost]
         public IActionResult EditSup(int id_ticket)
         {
             HomeEditViewModel model = new HomeEditViewModel();
@@ -88,9 +85,6 @@ namespace TI_Projeto_Grupo7.Controllers
             SupportDTO support = _supportService.Get(id_ticket).Results.FirstOrDefault();
             model.id_ticket = support.id_ticket;
             model.supName = support.supName;
-            model.email = support.email;
-            model.message = support.message;
-            model.subject= support.subject;
 
             return View(model);
         }
