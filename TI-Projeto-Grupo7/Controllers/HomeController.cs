@@ -131,6 +131,12 @@ namespace LojaOnline.Controllers
             return View("Index", GetIndexViewModel());
         }
 
+        public IActionResult Privacy(){
+
+            return View("Privacy");
+
+        }
+
         private HomeIndexViewModel GetIndexViewModel()
         {
             HomeIndexViewModel model = new HomeIndexViewModel();
