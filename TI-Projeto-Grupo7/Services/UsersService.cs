@@ -104,7 +104,7 @@ namespace TI_Projeto_Grupo7.Services
             }catch (SqlException ex){
 
                 _logger.LogError(ex, "An error occurred while fetching users.");
-                return new ExecutionResultFactory<UsersDTO>().GetFailedExecutionResult("Failed to insert into users.");
+                return new ExecutionResultFactory<UsersDTO>().GetFailedExecutionResult("Failed to insert the user.");
 
             }catch (Exception ex){
 
@@ -174,7 +174,7 @@ namespace TI_Projeto_Grupo7.Services
             }catch (SqlException ex){
 
                 _logger.LogError(ex, "An error occurred while fetching users.");
-                return new ExecutionResultFactory<UsersDTO>().GetFailedExecutionResult("Failed to retrive users.");
+                return new ExecutionResultFactory<UsersDTO>().GetFailedExecutionResult("Failed to update the user.");
 
             }catch (Exception ex){
 
@@ -209,7 +209,7 @@ namespace TI_Projeto_Grupo7.Services
             catch (SqlException ex){
 
                 _logger.LogError(ex, "An error occurred while fetching users.");
-                return new ExecutionResultFactory<UsersDTO>().GetFailedExecutionResult("Failed to retrive users.");
+                return new ExecutionResultFactory<UsersDTO>().GetFailedExecutionResult("Failed to update the user.");
 
             }catch (Exception ex){
 
@@ -239,7 +239,7 @@ namespace TI_Projeto_Grupo7.Services
             }catch (SqlException ex){
 
                 _logger.LogError(ex, "An error occurred while fetching users.");
-                return new ExecutionResultFactory<UsersDTO>().GetFailedExecutionResult("Failed to retrive users.");
+                return new ExecutionResultFactory<UsersDTO>().GetFailedExecutionResult("Failed to delete the user.");
 
             }catch (Exception ex){
 
@@ -269,7 +269,7 @@ namespace TI_Projeto_Grupo7.Services
             }catch (SqlException ex){
 
                 _logger.LogError(ex, "An error occurred while fetching users.");
-                return new ExecutionResultFactory<UsersDTO>().GetFailedExecutionResult("Failed to retrive users.");
+                return new ExecutionResultFactory<UsersDTO>().GetFailedExecutionResult("Failed to delete the user.");
 
             }catch (Exception ex){
 
