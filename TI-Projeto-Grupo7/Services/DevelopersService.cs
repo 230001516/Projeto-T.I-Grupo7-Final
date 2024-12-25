@@ -105,6 +105,7 @@ namespace TI_Projeto_Grupo7.Services
                 using (IDbConnection conn = new SqlConnection(_myOptions.ConnString)){
 
                     result = conn.Execute(Constants.SP_DEVELOPERS_UPDATE, parameters, commandType: CommandType.StoredProcedure);
+
                 }
 
                 return new ExecutionResultFactory<DevelopersDTO>().GetSuccessExecutionResult(dto, string.Empty);
@@ -135,6 +136,7 @@ namespace TI_Projeto_Grupo7.Services
                 using (IDbConnection conn = new SqlConnection(_myOptions.ConnString)){
 
                     result = conn.Execute(Constants.SP_DEVELOPERS_DELETE, parameters, commandType: CommandType.StoredProcedure);
+
                 }
 
                 return new ExecutionResultFactory<DevelopersDTO>().GetSuccessExecutionResult(new DevelopersDTO(), string.Empty);
