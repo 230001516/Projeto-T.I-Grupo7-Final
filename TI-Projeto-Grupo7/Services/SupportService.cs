@@ -10,10 +10,13 @@ namespace TI_Projeto_Grupo7.Services
     public class SupportService
     {
         private readonly MyOptions _myOptions;
+        private readonly ILogger<SupportService> _logger;
 
-        public SupportService(IOptions<MyOptions> myOptions)
+
+        public SupportService(IOptions<MyOptions> myOptions, ILogger<SupportService> logger)
         {
             _myOptions = myOptions.Value;
+            _logger = logger;
         }
 
         public ExecutionResult<List<SupportDTO>> Get(int? id_ticket = null)

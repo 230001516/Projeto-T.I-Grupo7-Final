@@ -15,12 +15,13 @@ namespace LojaOnline.Controllers
         private readonly DevelopersService _developersService;
         private readonly SupportService _supportService;
         private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly ILogger<DevelopersService> _loggerDev;
+        private readonly ILogger<SupportService> _loggerSup;
 
-        public HomeController(IOptions<MyOptions> myOptions, IHttpContextAccessor httpContextAccessor)
+        public HomeController(IOptions<MyOptions> myOptions, IHttpContextAccessor httpContextAccessor, ILogger<SupportService> loggerSup, ILogger<DevelopersService> loggerDev)
         {
-            _developersService = new DevelopersService(myOptions);
-            _supportService = new SupportService(myOptions);
-
+            _developersService = new DevelopersService(myOptions, loggerDev);
+            _supportService = new SupportService(myOptions, loggerSup);
             _httpContextAccessor = httpContextAccessor;
         }
 

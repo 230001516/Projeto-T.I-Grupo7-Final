@@ -5,6 +5,8 @@ using TI_Grupo7.Areas.Identity.Data;
 using TI_Projeto_Grupo7.Helpers;
 using Microsoft.Extensions.Options;
 using TI_Projeto_Grupo7.Services;
+using Serilog;
+using Serilog.Sinks.MSSqlServer;
 
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("BankDbContextConnection") ?? throw new InvalidOperationException("Connection string 'BankDbContextConnection' not found.");
@@ -12,6 +14,23 @@ var connectionString = builder.Configuration.GetConnectionString("BankDbContextC
 builder.Services.AddDbContext<BankDbContext>(options => options.UseSqlServer(connectionString));
 
 builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<BankDbContext>();
+
+var sinkOptions = new MSSqlServerSinkOptions
+{
+    TableName = "Logs",
+    AutoCreateSqlTable = true 
+};
+
+Log.Logger = new LoggerConfiguration()
+    .WriteTo.Console() // Temporario, apenas para debug
+    .WriteTo.MSSqlServer(
+        connectionString: connectionString,
+        sinkOptions: sinkOptions
+    )
+    .CreateLogger();
+
+builder.Logging.ClearProviders();
+builder.Logging.AddSerilog();
 
 // Add services to the container.
 builder.Services.AddScoped<UsersService>();

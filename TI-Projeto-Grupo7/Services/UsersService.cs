@@ -70,8 +70,7 @@ namespace TI_Projeto_Grupo7.Services
                 _logger.LogError(ex, "An error occurred while fetching users.");
                 return new ExecutionResultFactory<List<UsersDTO>>().GetFailedExecutionResult("Failed to retrive users.");
 
-            }
-            catch (Exception ex){
+            }catch (Exception ex){
 
                 _logger.LogError(ex, "An unexpected error occurred.");
                 return new ExecutionResultFactory<List<UsersDTO>>().GetFailedExecutionResult("An unexpected error occurred.");
