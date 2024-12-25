@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace TI_Grupo7.Controllers
+namespace TI_Projeto_Grupo7.Controllers
 {
     public class AdminController : Controller
     {
