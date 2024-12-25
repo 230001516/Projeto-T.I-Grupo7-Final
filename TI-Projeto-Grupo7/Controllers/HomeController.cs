@@ -6,6 +6,7 @@ using TI_Projeto_Grupo7.Models.DTO;
 using TI_Projeto_Grupo7.Models.ViewsModels.Home;
 using TI_Projeto_Grupo7.Services;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace LojaOnline.Controllers
 {
@@ -23,6 +24,8 @@ namespace LojaOnline.Controllers
             _developersService = new DevelopersService(myOptions, loggerDev);
             _supportService = new SupportService(myOptions, loggerSup);
             _httpContextAccessor = httpContextAccessor;
+            _loggerDev = loggerDev;
+            _loggerSup = loggerSup;
         }
 
         public IActionResult Index()
@@ -38,15 +41,23 @@ namespace LojaOnline.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateDev(HomeCreateViewModel model)
-        {
+        public IActionResult CreateDev(HomeCreateViewModel model){
+
             DevelopersDTO dto = new DevelopersDTO();
             dto.devName = model.devName;
 
             ExecutionResult<DevelopersDTO> result = _developersService.Insert(dto, GetUsername());
+            
+            if (!result.Status){
 
+                _loggerDev.LogWarning("Failed to create developer: {Message}", result.Message);
+                return View("Index", model);
+            
+            }
 
-            return View("Index", GetIndexViewModel());
+            _loggerDev.LogInformation("Successfully created developer: {DevName}", dto.devName);
+            return RedirectToAction("Index");
+
         }
 
         [HttpPost]
@@ -114,22 +125,39 @@ namespace LojaOnline.Controllers
             return View(model);
         }
 
-        public IActionResult DeleteDev(int id_developer)
-        {
+        public IActionResult DeleteDev(int id_developer){
+
             HomeEditViewModel model = new HomeEditViewModel();
 
             ExecutionResult<DevelopersDTO> resultd = _developersService.Delete(id_developer);
 
-            return View("Index", GetIndexViewModel());
+            if (!resultd.Status){
+
+                _loggerDev.LogWarning("Failed to delete developer: {Message}", resultd.Message);
+                return BadRequest(resultd.Message);
+            
+            }
+
+            _loggerDev.LogInformation("Successfully deleted developer with ID: {Id}", id_developer);
+            return RedirectToAction("Index");
+
         }
 
-        public IActionResult DeleteSup(int id_ticket)
-        {
+        public IActionResult DeleteSup(int id_ticket){
+
             HomeEditViewModel model = new HomeEditViewModel();
 
             ExecutionResult<SupportDTO> results = _supportService.Delete(id_ticket);
 
-            return View("Index", GetIndexViewModel());
+            if (!results.Status){
+
+                _loggerDev.LogWarning("Failed to delete support ticket: {Message}", results.Message);
+                return BadRequest(results.Message);
+
+            }
+
+            _loggerDev.LogInformation("Successfully deleted support ticket with ID: {Id}", id_ticket);
+            return RedirectToAction("Index");
         }
 
         public IActionResult Privacy(){
