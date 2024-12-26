@@ -23,7 +23,7 @@ using TI_Projeto_Grupo7.Helpers;
 using TI_Projeto_Grupo7.Models.DTO;
 using TI_Projeto_Grupo7.Services;
 
-namespace TI_Grupo7.Areas.Identity.Pages.Account
+namespace TI_Projeto_Grupo7.Areas.Identity.Pages.Account
 {
     public class RegisterModel : PageModel
     {
