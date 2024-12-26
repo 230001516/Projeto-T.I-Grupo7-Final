@@ -1551,3 +1551,75 @@ section,
   font-size: 14px;
 }
 
+/*--------------------------------------------------------------
+# Form Support
+--------------------------------------------------------------*/
+
+.contact .info-item2 {
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    border-radius: 8px;
+    background-color: var(--background-color, #ffffff);
+    margin-top: 30px;
+}
+
+    .contact .info-item2 input[type="text"],
+    .contact .info-item2 input[type="email"],
+    .contact .info-item2 textarea {
+        color: var(--default-color, #333);
+        background-color: var(--background-input, #f8f9fa);
+        border: 1px solid var(--border-color, #ddd);
+        font-size: 14px;
+        padding: 10px 15px;
+        margin-bottom: 15px;
+        width: 100%;
+        border-radius: 4px;
+        transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    }
+
+        .contact .info-item2 input[type="text"]:focus,
+        .contact .info-item2 input[type="email"]:focus,
+        .contact .info-item2 textarea:focus {
+            border-color: var(--accent-color, #007bff);
+            box-shadow: 0px 0px 8px rgba(0, 123, 255, 0.25);
+            outline: none;
+        }
+
+        .contact .info-item2 input[type="text"]::placeholder,
+        .contact .info-item2 input[type="email"]::placeholder,
+        .contact .info-item2 textarea::placeholder {
+            color: #aaa;
+        }
+
+    .contact .info-item2 button[type="submit"] {
+        color: #fff;
+        background-color: var(--accent-color, #007bff);
+        border: none;
+        padding: 10px 30px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        border-radius: 50px;
+        transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
+    }
+
+        .contact .info-item2 button[type="submit"]:hover {
+            background-color: var(--accent-hover-color, #0056b3);
+            transform: scale(1.05);
+        }
+
+@media (max-width: 575px) {
+    .contact .info-item2 {
+        padding: 20px;
+    }
+
+        .contact .info-item2 input[type="text"],
+        .contact .info-item2 input[type="email"],
+        .contact .info-item2 textarea {
+            font-size: 13px;
+        }
+
+        .contact .info-item2 button[type="submit"] {
+            font-size: 14px;
+        }
+}
