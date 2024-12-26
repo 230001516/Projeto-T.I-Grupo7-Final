@@ -7,8 +7,9 @@ using TI_Projeto_Grupo7.Models.ViewsModels.Home;
 using TI_Projeto_Grupo7.Services;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Humanizer;
 
-namespace LojaOnline.Controllers
+namespace TI_Projeto_Grupo7.Controllers
 {
     public class HomeController : Controller
     {
@@ -69,13 +70,22 @@ namespace LojaOnline.Controllers
                 subject = model.subject,
                 message = model.message
             };
+            
             ExecutionResult<SupportDTO> result = _supportService.Insert(dto, GetUsername());
 
+            if (!result.Status){
+
+                _loggerDev.LogWarning("Failed to create ticket: {Message}", result.Message);
+                return View("Index", model);
+
+            }
+
+            _loggerDev.LogInformation("Successfully created ticket: {Subject}", dto.subject);
             return RedirectToAction("Index");
         }
 
-        public IActionResult EditDev(int id_developer)
-        {
+        public IActionResult EditDev(int id_developer){
+
             HomeEditViewModel model = new HomeEditViewModel();
 
             DevelopersDTO developer = _developersService.Get(id_developer).Results.FirstOrDefault();
@@ -90,8 +100,8 @@ namespace LojaOnline.Controllers
             return View(model);
         }
 
-        public IActionResult EditSup(int id_ticket)
-        {
+        public IActionResult EditSup(int id_ticket){
+
             HomeEditViewModel model = new HomeEditViewModel();
 
             SupportDTO support = _supportService.Get(id_ticket).Results.FirstOrDefault();
@@ -102,27 +112,45 @@ namespace LojaOnline.Controllers
         }
 
         [HttpPost]
-        public IActionResult EditDev(HomeEditViewModel model)
-        {
+        public IActionResult EditDev(HomeEditViewModel model){
+
             DevelopersDTO developer = new DevelopersDTO();
             developer.id_developer = model.id_developer;
             developer.devName = model.devName;
 
             ExecutionResult<DevelopersDTO> resultd = _developersService.Update(developer, GetUsername());
 
-            return View(model);
+            if (!resultd.Status){
+
+                _loggerDev.LogWarning("Failed to edit developer: {Message}", resultd.Message);
+                return View("Index", model);
+            }
+
+            _loggerDev.LogInformation("Successfully edited developer: {DevName}", developer.devName);
+            return RedirectToAction("Index");
+
+  
         }
 
         [HttpPost]
-        public IActionResult EditSup(HomeEditViewModel model)
-        {
+        public IActionResult EditSup(HomeEditViewModel model){
+
             SupportDTO support = new SupportDTO();
             support.id_ticket = model.id_ticket;
             support.supName = model.supName;
 
             ExecutionResult<SupportDTO> results = _supportService.Update(support, GetUsername());
 
-            return View(model);
+            if (!results.Status){
+
+                _loggerDev.LogWarning("Failed to edit ticket: {Message}", results.Message);
+                return View("Index", model);
+
+            }
+
+            _loggerDev.LogInformation("Successfully edited ticket: {Subject}", support.subject);
+            return RedirectToAction("Index");
+
         }
 
         public IActionResult DeleteDev(int id_developer){

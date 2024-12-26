@@ -93,7 +93,7 @@ namespace TI_Projeto_Grupo7.Areas.Identity.Pages.Account
             [Required]
             [DataType(DataType.Password)]
             [Display(Name = "Password")]
-            [PasswordComplexity] // Custom Class from Helpers 
+            [PasswordComplexity]
             public string Password { get; set; }
 
             /// <summary>
