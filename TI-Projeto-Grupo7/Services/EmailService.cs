@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Extensions.Logging;
+using System;
 using System.Net;
 using System.Net.Mail;
 using System.Threading.Tasks;
@@ -16,6 +17,7 @@ namespace TI_Projeto_Grupo7.Services
         private readonly int _smtpPort;
         private readonly string _fromEmail;
         private readonly string _password;
+        private readonly ILogger<EmailService> _logger;
 
         public EmailService(string smtpHost, int smtpPort, string fromEmail, string password)
         {
@@ -51,7 +53,7 @@ namespace TI_Projeto_Grupo7.Services
 
             }catch (Exception ex){
 
-                Console.WriteLine($"Error sending email: {ex.Message}");
+                _logger.LogError(ex, $"Error sending email: {ex.Message}");
                 return false;
             
             }
