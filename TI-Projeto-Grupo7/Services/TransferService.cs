@@ -18,11 +18,9 @@ namespace TI_Projeto_Grupo7.Services
             _logger = logger;
         }
 
-        public ExecutionResult<List<TransfersDTO>> Get(int? id_transfer = null)
-        {
+        public ExecutionResult<List<TransfersDTO>> Get(int? id_transfer = null){
 
-            try
-            {
+            try{
 
                 List<TransfersDTO> listt = new List<TransfersDTO>();
 
@@ -30,8 +28,7 @@ namespace TI_Projeto_Grupo7.Services
                 parameters.Add("@id_transfer", id_transfer, DbType.Int32, ParameterDirection.Input);
 
 
-                using (IDbConnection conn = new SqlConnection(_myOptions.ConnString))
-                {
+                using (IDbConnection conn = new SqlConnection(_myOptions.ConnString)){
 
                     listt = conn.Query<TransfersDTO>(Constants.SP_TRANSFERS_GET, parameters, commandType: CommandType.StoredProcedure).ToList();
 
@@ -39,16 +36,12 @@ namespace TI_Projeto_Grupo7.Services
 
                 return new ExecutionResultFactory<List<TransfersDTO>>().GetSuccessExecutionResult(listt, string.Empty);
 
-            }
-            catch (SqlException ex)
-            {
+            }catch (SqlException ex){
 
                 _logger.LogError(ex, "An error occurred while fetching transfers.");
                 return new ExecutionResultFactory<List<TransfersDTO>>().GetFailedExecutionResult("Failed to retrive transfers.");
 
-            }
-            catch (Exception ex)
-            {
+            }catch (Exception ex){
 
                 _logger.LogError(ex, "An unexpected error occurred.");
                 return new ExecutionResultFactory<List<TransfersDTO>>().GetFailedExecutionResult("An unexpected error occurred.");
@@ -56,21 +49,19 @@ namespace TI_Projeto_Grupo7.Services
             }
         }
 
-        public ExecutionResult<TransfersDTO> Insert(TransfersDTO dto, string user)
-        {
+        public ExecutionResult<TransfersDTO> Insert(TransfersDTO dto, string user){
 
-            try
-            {
+            try{
 
                 int result;
 
                 DynamicParameters parameters = new DynamicParameters();
                 parameters.Add("@id_account", dto.id_account, DbType.Int32, ParameterDirection.Input);
+                parameters.Add("@transfer_date", dto.transfer_date, DbType.DateTime, ParameterDirection.Input);
                 parameters.Add("@transfer_value", dto.transfer_value, DbType.Decimal, ParameterDirection.Input);
                 parameters.Add("@account_number", dto.account_number, DbType.Int32, ParameterDirection.Input);
 
-                using (IDbConnection conn = new SqlConnection(_myOptions.ConnString))
-                {
+                using (IDbConnection conn = new SqlConnection(_myOptions.ConnString)){
 
                     result = conn.Execute(Constants.SP_TRANSFERS_INSERT, parameters, commandType: CommandType.StoredProcedure);
 
@@ -78,16 +69,12 @@ namespace TI_Projeto_Grupo7.Services
 
                 return new ExecutionResultFactory<TransfersDTO>().GetSuccessExecutionResult(dto, string.Empty);
 
-            }
-            catch (SqlException ex)
-            {
+            }catch (SqlException ex){
 
                 _logger.LogError(ex, "An error occurred while fetching transfers.");
                 return new ExecutionResultFactory<TransfersDTO>().GetFailedExecutionResult("Failed to insert the transfer.");
 
-            }
-            catch (Exception ex)
-            {
+            }catch (Exception ex){
 
                 _logger.LogError(ex, "An unexpected error occurred.");
                 return new ExecutionResultFactory<TransfersDTO>().GetFailedExecutionResult("An unexpected error occurred.");
@@ -95,11 +82,9 @@ namespace TI_Projeto_Grupo7.Services
             }
         }
 
-        public ExecutionResult<TransfersDTO> Update(TransfersDTO dto, string user)
-        {
+        public ExecutionResult<TransfersDTO> Update(TransfersDTO dto, string user){
 
-            try
-            {
+            try{
 
                 int result;
 
@@ -111,8 +96,7 @@ namespace TI_Projeto_Grupo7.Services
                 parameters.Add("@account_number", dto.account_number, DbType.Int32, ParameterDirection.Input);
 
 
-                using (IDbConnection conn = new SqlConnection(_myOptions.ConnString))
-                {
+                using (IDbConnection conn = new SqlConnection(_myOptions.ConnString)){
 
                     result = conn.Execute(Constants.SP_TRANSFERS_UPDATE, parameters, commandType: CommandType.StoredProcedure);
 
@@ -120,16 +104,12 @@ namespace TI_Projeto_Grupo7.Services
 
                 return new ExecutionResultFactory<TransfersDTO>().GetSuccessExecutionResult(dto, string.Empty);
 
-            }
-            catch (SqlException ex)
-            {
+            }catch (SqlException ex){
 
                 _logger.LogError(ex, "An error occurred while fetching transfers.");
                 return new ExecutionResultFactory<TransfersDTO>().GetFailedExecutionResult("Failed to update the transfer.");
 
-            }
-            catch (Exception ex)
-            {
+            }catch (Exception ex){
 
                 _logger.LogError(ex, "An unexpected error occurred.");
                 return new ExecutionResultFactory<TransfersDTO>().GetFailedExecutionResult("An unexpected error occurred.");
@@ -137,11 +117,9 @@ namespace TI_Projeto_Grupo7.Services
             }
         }
 
-        public ExecutionResult<TransfersDTO> Delete(int id_transfer)
-        {
+        public ExecutionResult<TransfersDTO> Delete(int id_transfer){
 
-            try
-            {
+            try{
 
                 int result;
 
@@ -158,16 +136,12 @@ namespace TI_Projeto_Grupo7.Services
 
                 return new ExecutionResultFactory<TransfersDTO>().GetSuccessExecutionResult(new TransfersDTO(), string.Empty);
 
-            }
-            catch (SqlException ex)
-            {
+            }catch (SqlException ex){
 
                 _logger.LogError(ex, "An error occurred while fetching accounts.");
                 return new ExecutionResultFactory<TransfersDTO>().GetFailedExecutionResult("Failed to delete transfer.");
 
-            }
-            catch (Exception ex)
-            {
+            }catch (Exception ex){
 
                 _logger.LogError(ex, "An unexpected error occurred.");
                 return new ExecutionResultFactory<TransfersDTO>().GetFailedExecutionResult("An unexpected error occurred.");
