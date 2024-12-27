@@ -1,0 +1,99 @@
+﻿
+.email-form-container {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 30px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    background-color: var(--background-color, #ffffff);
+    font-family: Arial, sans-serif;
+}
+
+    .email-form-container .form-control {
+        color: var(--default-color, #333);
+        background-color: var(--background-input, #f8f9fa);
+        border: 1px solid var(--border-color, #ddd);
+        font-size: 14px;
+        padding: 10px 15px;
+        margin-bottom: 15px;
+        border-radius: 4px;
+        transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    }
+
+        .email-form-container .form-control:focus {
+            border-color: var(--accent-color, #007bff);
+            box-shadow: 0px 0px 8px rgba(0, 123, 255, 0.25);
+            outline: none;
+        }
+
+        .email-form-container .form-control::placeholder {
+            color: #aaa;
+        }
+
+    .email-form-container label {
+        color: var(--label-color, #555);
+        font-weight: 600;
+        margin-bottom: 5px;
+    }
+
+    .email-form-container button#change-email-button {
+        color: #fff;
+        background-color: #f96332;
+        border: none;
+        padding: 10px 30px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        border-radius: 50px;
+        transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
+        width: 100%;
+    }
+
+        .email-form-container button#change-email-button:hover {
+            background-color: #d75429;
+            transform: scale(1.05);
+        }
+
+    .email-form-container button#email-verification {
+        color: #f96332;
+        background: none;
+        border: none;
+        font-size: 14px;
+        font-weight: 600;
+        padding: 0;
+        cursor: pointer;
+        text-decoration: underline;
+        transition: color 0.3s ease-in-out;
+    }
+/
+        .email-form-container button#email-verification:hover {
+            color: #d75429;
+        }
+
+    .email-form-container .input-group-text {
+        background-color: transparent;
+        border: none;
+        font-size: 16px;
+        color: #28a745;
+    }
+
+    .email-form-container .text-danger {
+        font-size: 13px;
+        margin-top: -10px;
+        margin-bottom: 10px;
+        color: var(--error-color, #e74c3c);
+    }
+
+@media (max-width: 575px) {
+    .email-form-container {
+        padding: 20px;
+    }
+
+        .email-form-container .form-control {
+            font-size: 13px;
+        }
+
+        .email-form-container button#change-email-button {
+            font-size: 14px;
+        }
+}

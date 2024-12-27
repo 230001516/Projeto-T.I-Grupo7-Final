@@ -5,11 +5,13 @@
     ViewData["ActivePage"] = ManageNavPages.ExternalLogins;
 }
 
+<link href="~/css2/ExternalLogins.css"/>
+
 <partial name="_StatusMessage" for="StatusMessage" />
 @if (Model.CurrentLogins?.Count > 0)
 {
     <h3>Registered Logins</h3>
-    <table class="table">
+    <table class="external-logins-table">
         <tbody>
             @foreach (var login in Model.CurrentLogins)
             {

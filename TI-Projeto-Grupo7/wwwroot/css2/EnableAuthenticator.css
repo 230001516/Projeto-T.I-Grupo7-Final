@@ -1,0 +1,97 @@
+﻿.authenticator-app-container {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 30px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    background-color: var(--background-color, #ffffff);
+    font-family: Arial, sans-serif;
+}
+
+    .authenticator-app-container .form-control {
+        color: var(--default-color, #333);
+        background-color: var(--background-input, #f8f9fa);
+        border: 1px solid var(--border-color, #ddd);
+        font-size: 14px;
+        padding: 10px 15px;
+        margin-bottom: 15px;
+        border-radius: 4px;
+        transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    }
+
+        .authenticator-app-container .form-control:focus {
+            border-color: var(--accent-color, #ff5821);
+            box-shadow: 0px 0px 8px rgba(255, 88, 33, 0.25);
+            outline: none;
+        }
+
+        .authenticator-app-container .form-control::placeholder {
+            color: #aaa;
+        }
+
+    .authenticator-app-container label {
+        color: var(--label-color, #555);
+        font-weight: 600;
+        margin-bottom: 5px;
+    }
+
+    .authenticator-app-container button[type="submit"] {
+        color: #fff;
+        background-color: #ff5821;
+        border: none;
+        padding: 10px 30px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        border-radius: 50px;
+        transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
+        width: 100%;
+    }
+
+        .authenticator-app-container button[type="submit"]:hover {
+            background-color: #e04d1d;
+            transform: scale(1.05);
+        }
+
+    .authenticator-app-container .text-danger {
+        font-size: 13px;
+        margin-top: -10px;
+        margin-bottom: 10px;
+        color: var(--error-color, #e74c3c);
+    }
+
+.auth-link, .info-link {
+    color: #0056b3;
+    font-weight: bold;
+    text-decoration: underline;
+    transition: color 0.3s ease-in-out;
+}
+
+    .auth-link:hover, .info-link:hover {
+        color: #003d80;
+    }
+
+@media (max-width: 575px) {
+    .authenticator-app-container {
+        padding: 20px;
+    }
+
+        .authenticator-app-container .form-control {
+            font-size: 13px;
+        }
+
+        .authenticator-app-container button[type="submit"] {
+            font-size: 14px;
+        }
+}
+
+.qr-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f8f9fa;
+}
