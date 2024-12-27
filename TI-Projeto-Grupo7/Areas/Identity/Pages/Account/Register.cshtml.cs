@@ -37,6 +37,7 @@ namespace TI_Projeto_Grupo7.Areas.Identity.Pages.Account
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
         private readonly UsersService _usersService;
+        private readonly IEmailService _emailService;
 
         public RegisterModel(
             UserManager<ApplicationUser> userManager,
@@ -44,7 +45,7 @@ namespace TI_Projeto_Grupo7.Areas.Identity.Pages.Account
             SignInManager<ApplicationUser> signInManager,
             ILogger<RegisterModel> logger,
             IEmailSender emailSender,
-            UsersService usersService)
+            UsersService usersService, IEmailService emailService)
         {
             _userManager = userManager;
             _userStore = userStore;
@@ -53,6 +54,7 @@ namespace TI_Projeto_Grupo7.Areas.Identity.Pages.Account
             _logger = logger;
             _emailSender = emailSender;
             _usersService = usersService;
+            _emailService = emailService;
         }
 
         /// <summary>
@@ -183,7 +185,7 @@ namespace TI_Projeto_Grupo7.Areas.Identity.Pages.Account
                         values: new { area = "Identity", userId = userId, code = code, returnUrl = returnUrl },
                         protocol: Request.Scheme);
 
-                    await SendEmailAsync(Input.Email, "Confirm your email",
+                    await _emailService.SendEmailAsync(Input.Email, "Confirm your email",
                         $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
 
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)
