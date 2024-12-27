@@ -69,7 +69,7 @@
                             <!-- Logged-In User Options -->
                             <li class="dropdown">
                                 <a href="#">
-                                    <img src="~/assets/img/user-icon.png" class="rounded-circle" alt="User Icon" width="30">
+                                    <img src="~/assets/img/user.jpg" class="rounded-circle" alt="User Icon" width="30">
                                     @User.Identity.Name
                                     <i class="bi bi-chevron-down"></i>
                                 </a>
@@ -77,11 +77,14 @@
                                     <li><a href="@Url.Action("Transferencia","Transferencia")">Transfers</a></li>
                                     <li><a href="/Identity/Account/Manage">Profile</a></li>
                                     <li>
-                                        <form action="/Identity/Account/Logout" method="post" style="margin: 0;">
-                                            @Html.AntiForgeryToken()  <!-- Proteção contra cross site request forgery -->
-                                            <button class="dropdown-item" type="submit">Logout</button>
+                                        <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("", new { area = "" })" method="post" style="display: inline;">
+                                            @Html.AntiForgeryToken()
+                                            <button type="submit" style="color: #333; background: none; border: none; text-decoration: none; padding-left: 20px;padding-top:5px; margin: 0; cursor: pointer; transition: color 0.3s;"
+                                                    onmouseover="this.style.color='#ff5821'"
+                                                    onmouseout="this.style.color='#333'">
+                                                Logout
+                                            </button>
                                         </form>
-                                    </li>
                                 </ul>
                             </li>
                         }
