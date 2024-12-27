@@ -62,6 +62,7 @@
     <Folder Include="StoreProcedures\Accounts" />
     <Folder Include="StoreProcedures\Developers" />
     <Folder Include="StoreProcedures\Support" />
+    <Folder Include="StoreProcedures\Transfers" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Tables\Accounts.sql" />
@@ -88,5 +89,9 @@
     <Build Include="StoreProcedures\Support\sp_support_get.sql" />
     <Build Include="StoreProcedures\Support\sp_support_insert.sql" />
     <Build Include="StoreProcedures\Support\sp_support_update.sql" />
+    <Build Include="StoreProcedures\Transfers\sp_transfers_delete.sql" />
+    <Build Include="StoreProcedures\Transfers\sp_transfers_get.sql" />
+    <Build Include="StoreProcedures\Transfers\sp_transfers_insert.sql" />
+    <Build Include="StoreProcedures\Transfers\sp_transfers_update.sql" />
   </ItemGroup>
 </Project>
