@@ -23,9 +23,9 @@
         public const string SP_SUPPORT_DELETE = "sp_support_delete";
         public const string SP_SUPPORT_UPDATE = "sp_support_update";
 
-        public const string SP_TRANFERS_INSERT = "sp_transfers_insert";
-        public const string SP_TRANFERS_GET = "sp_transfers_get";
-        public const string SP_TRANFERS_DELETE = "sp_transfers_delete";
-        public const string SP_TRANFERS_UPDATE = "sp_transfers_update";
+        public const string SP_TRANSFERS_INSERT = "sp_transfers_insert";
+        public const string SP_TRANSFERS_GET = "sp_transfers_get";
+        public const string SP_TRANSFERS_DELETE = "sp_transfers_delete";
+        public const string SP_TRANSFERS_UPDATE = "sp_transfers_update";
     }
 }
