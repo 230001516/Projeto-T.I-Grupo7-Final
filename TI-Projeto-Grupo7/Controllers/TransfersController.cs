@@ -2,21 +2,21 @@
 
 namespace TI_Projeto_Grupo7.Controllers
 {
-    public class TransferenciaController : Controller
+    public class TransfersController : Controller
     {
         public IActionResult Index()
         {
             return View();
         }
 
-        public IActionResult Transferencia(int transferencia)
+        public IActionResult Transfer(int transferencia)
         {
             ViewData["Transferências"] = transferencia;
 
             return View();
         }
 
-        public IActionResult HisTransferencias(int hisTrans)
+        public IActionResult TransfersHistory(int hisTrans)
         {
             ViewData["Histórico Transferências"] = hisTrans;
 
