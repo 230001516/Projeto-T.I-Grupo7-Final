@@ -15,18 +15,18 @@
 
 <div class="transfer-container">
     <h2>Transferência</h2>
-    <form method="post">
+    <form asp-action="MakeTransfer" method="post">
         <div class="form-group">
-            <label for="conta-origem">Origin Account</label>
-            <input type="text" id="conta-origem" name="conta_origem" required>
+            <label for="id_account">Origin Account</label>
+            <input type="text" id="id_account" name="id_account" required>
         </div>
         <div class="form-group">
-            <label for="conta-destino">Destination account</label>
-            <input type="text" id="conta-destino" name="conta_destino" required>
+            <label for="account_number">Destination account</label>
+            <input type="text" id="account_number" name="account_number" required>
         </div>
         <div class="form-group">
-            <label for="valor">Amount (EUR)</label>
-            <input type="number" id="valor" name="valor" min="0.01" step="5" placeholder="Amount to transfer" required>
+            <label for="transfer_value">Amount (EUR)</label>
+            <input type="number" id="transfer_value" name="transfer_value" min="0.01" placeholder="Amount to transfer" required>
         </div>
         <button type="submit" class="submit-btn">Transferir</button>
     </form>
