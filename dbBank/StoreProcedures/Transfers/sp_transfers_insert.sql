@@ -1,6 +1,6 @@
 ﻿CREATE PROCEDURE [dbo].[sp_transfers_insert]
     @id_account    INT,
-    @transfer_date DATE,
+    @transfer_date NVARCHAR(100),
     @transfer_value DECIMAL(10,2),
     @account_number INT
 

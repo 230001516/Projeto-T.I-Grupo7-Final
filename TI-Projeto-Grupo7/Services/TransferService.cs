@@ -57,11 +57,26 @@ namespace TI_Projeto_Grupo7.Services
 
                 DynamicParameters parameters = new DynamicParameters();
                 parameters.Add("@id_account", dto.id_account, DbType.Int32, ParameterDirection.Input);
-                parameters.Add("@transfer_date", dto.transfer_date, DbType.DateTime, ParameterDirection.Input);
+                parameters.Add("@transfer_date", dto.transfer_date, DbType.String, ParameterDirection.Input);
                 parameters.Add("@transfer_value", dto.transfer_value, DbType.Decimal, ParameterDirection.Input);
                 parameters.Add("@account_number", dto.account_number, DbType.Int32, ParameterDirection.Input);
 
                 using (IDbConnection conn = new SqlConnection(_myOptions.ConnString)){
+
+                    var checkOriginAccount = conn.Query<int>("SELECT COUNT(*) FROM Accounts WHERE id_account = @id_account", new { id_account = dto.id_account }).FirstOrDefault();
+                    var checkDestAccount = conn.Query<int>("SELECT COUNT(*) FROM Accounts WHERE account_number = @account_number", new { account_number = dto.account_number }).FirstOrDefault();
+
+                    if (checkOriginAccount == 0) { 
+
+                        return new ExecutionResultFactory<TransfersDTO>().GetFailedExecutionResult("Origin account does not exist.");
+                    
+                    }
+
+                    if (checkDestAccount == 0){
+
+                        return new ExecutionResultFactory<TransfersDTO>().GetFailedExecutionResult("Destination account does not exist.");
+                    
+                    }
 
                     result = conn.Execute(Constants.SP_TRANSFERS_INSERT, parameters, commandType: CommandType.StoredProcedure);
 
@@ -91,7 +106,7 @@ namespace TI_Projeto_Grupo7.Services
                 DynamicParameters parameters = new DynamicParameters();
                 parameters.Add("@id_transfer", dto.id_transfer, DbType.Int32, ParameterDirection.Input);
                 parameters.Add("@id_account", dto.id_account, DbType.Int32, ParameterDirection.Input);
-                parameters.Add("@transfer_date", dto.transfer_date, DbType.DateTime, ParameterDirection.Input);
+                parameters.Add("@transfer_date", dto.transfer_date, DbType.String, ParameterDirection.Input);
                 parameters.Add("@transfer_value", dto.transfer_value, DbType.Int32, ParameterDirection.Input);
                 parameters.Add("@account_number", dto.account_number, DbType.Int32, ParameterDirection.Input);
 
