@@ -1,0 +1,73 @@
+﻿.reset-authenticator-container {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 30px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    background-color: var(--background-color, #ffffff);
+    font-family: Arial, sans-serif;
+}
+
+    .reset-authenticator-container .alert {
+        padding: 15px 20px;
+        border-radius: 4px;
+        background-color: var(--alert-background, #fff3cd);
+        color: var(--alert-color, #856404);
+        border: 1px solid var(--alert-border, #ffeeba);
+        font-size: 14px;
+        margin-bottom: 20px;
+    }
+
+        .reset-authenticator-container .alert .glyphicon {
+            margin-right: 8px;
+            font-size: 16px;
+        }
+
+    .reset-authenticator-container h3 {
+        color: var(--title-color, #333);
+        font-size: 20px;
+        font-weight: 600;
+        margin-bottom: 15px;
+    }
+
+    .reset-authenticator-container p {
+        color: var(--text-color, #555);
+        font-size: 14px;
+        line-height: 1.6;
+    }
+
+    .reset-authenticator-container form {
+        text-align: center;
+    }
+
+    .reset-authenticator-container button[type="submit"] {
+        color: #fff;
+        background-color: #d9534f;
+        border: none;
+        padding: 10px 30px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        border-radius: 50px;
+        transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
+    }
+
+        .reset-authenticator-container button[type="submit"]:hover {
+            background-color: #c9302c;
+            transform: scale(1.05);
+        }
+
+@media (max-width: 575px) {
+    .reset-authenticator-container {
+        padding: 20px;
+    }
+
+        .reset-authenticator-container h3 {
+            font-size: 18px;
+        }
+
+        .reset-authenticator-container button[type="submit"] {
+            font-size: 14px;
+            padding: 8px 20px;
+        }
+}
