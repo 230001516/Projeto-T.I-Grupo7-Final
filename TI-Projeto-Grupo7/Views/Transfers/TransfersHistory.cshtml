@@ -1,0 +1,23 @@
+﻿@{
+    ViewData["Title"] = "Transfers History";
+}
+
+@model TI_Projeto_Grupo7.Models.ViewsModels.Transfers.TransfersIndexViewModel;
+
+<header id="header">
+    <div class="container position-relative d-flex align-items-center justify-content-between">
+        <a href="@Url.Action("Index","Home")" class="logo d-flex align-items-center">
+            <img src="~/assets/img/logo2.png" alt="">
+            <h1 class="sitename">EvoluBank</h1>
+        </a>
+    </div>
+</header>
+
+@foreach (var Transfer in Model.transfers)
+{
+    <li>
+        <a>@Transfer.transfer_value</a>
+        <a>@Transfer.transfer_date</a>
+        <a>@Transfer.account_number</a>
+    </li>
+}

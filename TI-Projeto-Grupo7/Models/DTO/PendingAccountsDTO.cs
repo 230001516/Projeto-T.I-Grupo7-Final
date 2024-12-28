@@ -3,7 +3,7 @@
     public class PendingAccountsDTO
     {
 
-        public int id_pendingAccount {  get; set; }
+        public int id_accountPending {  get; set; }
 
         public int id_user { get; set; }
 

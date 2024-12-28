@@ -1,5 +1,17 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @using TI_Grupo7.Areas.Identity.Data
+
+<link href="~/css/Manage.css" rel="stylesheet">
+
+<header id="header">
+    <div class="container position-relative d-flex align-items-center justify-content-between">
+        <a href="@Url.Action("Index","Home")" class="logo d-flex align-items-center">
+            <img src="~/assets/img/logo2.png" alt="">
+            <h1 class="sitename">EvoluBank</h1>
+        </a>
+    </div>
+</header>
+
 @inject SignInManager<ApplicationUser> SignInManager
 @{
     var hasExternalLogins = (await SignInManager.GetExternalAuthenticationSchemesAsync()).Any();

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.Identity.Client;
+using System.ComponentModel.DataAnnotations;
 using TI_Projeto_Grupo7.Models.DTO;
 
 namespace TI_Projeto_Grupo7.Models.ViewsModels.Home
@@ -37,6 +38,11 @@ namespace TI_Projeto_Grupo7.Models.ViewsModels.Home
 
         [Required]
         public string message { get; set; }
+
+        // Users
+
+        [Required]
+        public int is_worker { get; set; }
 
     }
 }

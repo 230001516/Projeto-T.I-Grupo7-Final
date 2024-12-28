@@ -22,5 +22,15 @@
         public const string SP_SUPPORT_GET = "sp_support_get";
         public const string SP_SUPPORT_DELETE = "sp_support_delete";
         public const string SP_SUPPORT_UPDATE = "sp_support_update";
+
+        public const string SP_TRANSFERS_INSERT = "sp_transfers_insert";
+        public const string SP_TRANSFERS_GET = "sp_transfers_get";
+        public const string SP_TRANSFERS_DELETE = "sp_transfers_delete";
+        public const string SP_TRANSFERS_UPDATE = "sp_transfers_update";
+
+        public const string SP_PENDING_ACCOUNTS_GET = "sp_pendingaccount_get";
+        public const string SP_PENDING_ACCOUNTS_INSERT = "sp_pendingaccount_insert";
+        public const string SP_PENDING_ACCOUNTS_UPDATE = "sp_pendingaccount_update";
+        public const string SP_PENDING_ACCOUNTS_DELETE = "sp_pendingaccount_delete";
     }
 }

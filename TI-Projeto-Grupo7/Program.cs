@@ -12,7 +12,12 @@ var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("BankDbContextConnection") ?? throw new InvalidOperationException("Connection string 'BankDbContextConnection' not found.");
 
 builder.Services.AddDbContext<BankDbContext>(options => options.UseSqlServer(connectionString));
-
+builder.Services.AddSingleton<IEmailService>(new EmailService(
+    smtpHost: "smtp.gmail.com",
+    smtpPort: 587,
+    fromEmail: "noreplytigrupo7@gmail.com",
+    password: "xzzz jimj adtu pufr"
+));
 builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<BankDbContext>();
 
 var sinkOptions = new MSSqlServerSinkOptions
@@ -34,6 +39,7 @@ builder.Logging.AddSerilog();
 
 // Add services to the container.
 builder.Services.AddScoped<UsersService>();
+builder.Services.AddTransient<TransferService>();
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
 builder.Services.AddHttpContextAccessor();

@@ -1,0 +1,81 @@
+﻿div.alert {
+    padding: 15px 20px;
+    border-radius: 6px;
+    margin: 15px 0;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+    div.alert.alert-danger {
+        background-color: #f8d7da !important;
+        color: #721c24 !important;
+        border: 1px solid #f5c6cb;
+    }
+
+    div.alert.alert-warning {
+        background-color: #fff3cd !important;
+        color: #856404 !important;
+        border: 1px solid #ffeeba;
+    }
+
+    div.alert a {
+        color: #0056b3 !important;
+        font-weight: bold;
+        text-decoration: underline;
+        transition: color 0.3s ease-in-out;
+    }
+
+        div.alert a:hover {
+            color: #003d80 !important;
+        }
+
+form button.btn-primary,
+a.btn-primary {
+    background-color: #f96332 !important;
+    color: #fff !important;
+    border: none;
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: 600;
+    margin: 5px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
+}
+
+    form button.btn-primary:hover,
+    a.btn-primary:hover {
+        background-color: #d75429 !important;
+        transform: scale(1.05);
+    }
+
+h3, h4 {
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    color: var(--default-title-color, #333) !important;
+    margin: 20px 0;
+}
+
+form {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+@media (max-width: 575px) {
+    form button.btn-primary,
+    a.btn-primary {
+        font-size: 12px;
+        padding: 8px 16px;
+        margin: 5px 0;
+    }
+
+    h3, h4 {
+        font-size: 18px;
+    }
+
+    div.alert {
+        font-size: 13px;
+        padding: 10px 15px;
+    }
+}

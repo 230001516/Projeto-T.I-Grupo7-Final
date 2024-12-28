@@ -8,5 +8,7 @@ namespace TI_Projeto_Grupo7.Models.ViewsModels.Home
         public List<DevelopersDTO> dev { get; set; }
 
         public List<SupportDTO> supp { get; set; }
+
+        public  List<UsersDTO> users { get; set; }
     }
 }
