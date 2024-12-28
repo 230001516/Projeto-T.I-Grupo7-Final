@@ -29,12 +29,12 @@ namespace TI_Projeto_Grupo7.Controllers
 
         public IActionResult Create()
         {
-            var model = new TransferCreateViewModel();
+            var model = new TransfersCreateViewModel();
             return View(model);
         }
 
 
-        public IActionResult MakeTransfer(TransferCreateViewModel model)
+        public IActionResult MakeTransfer(TransfersCreateViewModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -79,12 +79,11 @@ namespace TI_Projeto_Grupo7.Controllers
 
                 if (result.Status){
                  
-                    var history = result.Results.Select(transfer => new TransferHistoryViewModel{
+                    var history = result.Results.Select(transfer => new TransfersHistoryViewModel{
 
                         id_transfer = transfer.id_transfer,
                         id_account = transfer.id_account,
                         transfer_value = transfer.transfer_value,
-                        transfer_date = transfer.transfer_date,
                         account_number = transfer.account_number
 
                     }).ToList();
@@ -92,7 +91,7 @@ namespace TI_Projeto_Grupo7.Controllers
                     return View(history); 
                 }
 
-                return View(new List<TransferHistoryViewModel>()); 
+                return View(new List<TransfersHistoryViewModel>()); 
             
             }catch (Exception ex){
 
@@ -100,7 +99,7 @@ namespace TI_Projeto_Grupo7.Controllers
 
                 ModelState.AddModelError("", "An unexpected error occurred. Please try again later.");
 
-                return View(new List<TransferHistoryViewModel>());
+                return View(new List<TransfersHistoryViewModel>());
             }
         }
 

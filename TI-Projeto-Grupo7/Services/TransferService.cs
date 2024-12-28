@@ -57,7 +57,6 @@ namespace TI_Projeto_Grupo7.Services
 
                 DynamicParameters parameters = new DynamicParameters();
                 parameters.Add("@id_account", dto.id_account, DbType.Int32, ParameterDirection.Input);
-                parameters.Add("@transfer_date", dto.transfer_date, DbType.String, ParameterDirection.Input);
                 parameters.Add("@transfer_value", dto.transfer_value, DbType.Decimal, ParameterDirection.Input);
                 parameters.Add("@account_number", dto.account_number, DbType.Int32, ParameterDirection.Input);
 
@@ -106,7 +105,6 @@ namespace TI_Projeto_Grupo7.Services
                 DynamicParameters parameters = new DynamicParameters();
                 parameters.Add("@id_transfer", dto.id_transfer, DbType.Int32, ParameterDirection.Input);
                 parameters.Add("@id_account", dto.id_account, DbType.Int32, ParameterDirection.Input);
-                parameters.Add("@transfer_date", dto.transfer_date, DbType.String, ParameterDirection.Input);
                 parameters.Add("@transfer_value", dto.transfer_value, DbType.Int32, ParameterDirection.Input);
                 parameters.Add("@account_number", dto.account_number, DbType.Int32, ParameterDirection.Input);
 
