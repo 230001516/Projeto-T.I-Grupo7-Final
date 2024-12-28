@@ -98,7 +98,7 @@ namespace TI_Projeto_Grupo7.Controllers
 
                 _logger.LogError(ex, "An error occurred while fetching the transfer history.");
 
-                ModelState.AddModelError("", "An unexpected error occurred. Please try again later.");
+                ModelState.AddModelError(string.Empty, "An unexpected error occurred. Please try again later.");
 
                 return View(new List<TransferHistoryViewModel>());
             }
