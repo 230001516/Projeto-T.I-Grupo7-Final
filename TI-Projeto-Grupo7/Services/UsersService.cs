@@ -48,7 +48,6 @@ namespace TI_Projeto_Grupo7.Services
             }
         }
 
-            //Metodo Sincrono
             public async Task<ExecutionResult<List<UsersDTO>>> GetAsync(int? id_user = null) {
 
             try{
