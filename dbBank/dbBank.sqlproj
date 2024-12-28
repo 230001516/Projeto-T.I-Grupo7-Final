@@ -63,6 +63,7 @@
     <Folder Include="StoreProcedures\Developers" />
     <Folder Include="StoreProcedures\Support" />
     <Folder Include="StoreProcedures\Transfers" />
+    <Folder Include="StoreProcedures\PendingAccounts" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Tables\Accounts.sql" />
@@ -93,5 +94,9 @@
     <Build Include="StoreProcedures\Transfers\sp_transfers_get.sql" />
     <Build Include="StoreProcedures\Transfers\sp_transfers_insert.sql" />
     <Build Include="StoreProcedures\Transfers\sp_transfers_update.sql" />
+    <Build Include="StoreProcedures\PendingAccounts\sp_pendingaccount_get.sql" />
+    <Build Include="StoreProcedures\PendingAccounts\sp_pendingaccount_delete.sql" />
+    <Build Include="StoreProcedures\PendingAccounts\sp_pendingaccount_update.sql" />
+    <Build Include="StoreProcedures\PendingAccounts\sp_pendingaccount_insert.sql" />
   </ItemGroup>
 </Project>

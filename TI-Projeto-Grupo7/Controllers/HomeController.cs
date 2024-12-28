@@ -11,6 +11,7 @@ using Humanizer;
 
 namespace TI_Projeto_Grupo7.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         private readonly MyOptions _myOptions;

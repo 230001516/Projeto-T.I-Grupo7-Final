@@ -5,9 +5,11 @@ using TI_Projeto_Grupo7.Models.ViewsModels.Transfers;
 using System.Security.Claims;
 using TI_Projeto_Grupo7.Helpers;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.AspNetCore.Authorization;
 
 namespace TI_Projeto_Grupo7.Controllers
 {
+    [Authorize]
     public class TransfersController : Controller
     {
         private readonly TransferService _transferService;
@@ -29,11 +31,11 @@ namespace TI_Projeto_Grupo7.Controllers
 
         public IActionResult Create()
         {
-            var model = new TransfersCreateViewModel();
+            TransfersCreateViewModel model = new TransfersCreateViewModel();
             return View(model);
         }
 
-
+        [HttpPost]
         public IActionResult MakeTransfer(TransfersCreateViewModel model)
         {
             if (!ModelState.IsValid)
