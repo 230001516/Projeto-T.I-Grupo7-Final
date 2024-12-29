@@ -11,9 +11,9 @@ namespace TI_Projeto_Grupo7.Services
     public class PendingAccountsService
     {
         private readonly MyOptions _myOptions;
-        private readonly ILogger<DevelopersService> _logger;
+        private readonly ILogger<PendingAccountsService> _logger;
 
-        public PendingAccountsService(IOptions<MyOptions> myOptions, ILogger<DevelopersService> logger)
+        public PendingAccountsService(IOptions<MyOptions> myOptions, ILogger<PendingAccountsService> logger)
         {
 
             _myOptions = myOptions.Value;

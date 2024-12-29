@@ -230,37 +230,5 @@ namespace TI_Projeto_Grupo7.Areas.Identity.Pages.Account
             }
             return (IUserEmailStore<ApplicationUser>)_userStore;
         }
-
-        private async Task<bool> SendEmailAsync(string email, string subject, string confirmLink)
-        {
-
-            try
-            {
-                using (MailMessage message = new MailMessage())
-                {
-                    message.From = new MailAddress("noreplytigrupo7@gmail.com");
-                    message.To.Add(email);
-                    message.Subject = subject;
-                    message.IsBodyHtml = true;
-                    message.Body = confirmLink;
-
-                    using (SmtpClient smtpClient = new SmtpClient("smtp.gmail.com", 587))
-                    {
-                        smtpClient.EnableSsl = true;
-                        smtpClient.UseDefaultCredentials = false;
-                        smtpClient.Credentials = new NetworkCredential("noreplytigrupo7@gmail.com", "xzzz jimj adtu pufr");
-
-                        await smtpClient.SendMailAsync(message);
-                    }
-                }
-
-                return true;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error sending email: {ex.Message}");
-                return false;
-            }
-        }
     }
 }
