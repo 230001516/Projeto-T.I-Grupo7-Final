@@ -146,35 +146,25 @@ namespace TI_Projeto_Grupo7.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
-                var user = CreateUser();
+                var user = new ApplicationUser
+                {
+                    UserName = Input.Email,
+                    Email = Input.Email,
+                    FirstName = Input.FirstName,
+                    Surname = Input.Surname,
+                    Address = Input.Address,
+                    NIF = Input.NIF,
+                    is_worker = 0
+                };
 
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
+                await _userManager.SetPhoneNumberAsync(user, Input.PhoneNumber.ToString());
                 var result = await _userManager.CreateAsync(user, Input.Password);
 
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
-
-                    var userDto = new UsersDTO
-                    {
-                        firstname = Input.FirstName,
-                        surname = Input.Surname,
-                        nif = Input.NIF,
-                        user_address = Input.Address,
-                        email = Input.Email,
-                        phone_number = Input.PhoneNumber, 
-                        password = Input.Password 
-                    };
-
-                    // Insert user data using UsersService
-                    var insertResult = await _usersService.InsertAsync(userDto, userDto.email);
-
-                    if (!insertResult.Status)
-                    {
-                        ModelState.AddModelError(string.Empty, "Failed to insert user into the database.");
-                        return Page();
-                    }
 
                     var userId = await _userManager.GetUserIdAsync(user);
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
