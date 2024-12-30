@@ -38,11 +38,6 @@ namespace TI_Projeto_Grupo7.Controllers
         [HttpPost]
         public IActionResult MakeTransfer(TransfersCreateViewModel model)
         {
-            if (!ModelState.IsValid)
-            {
-                _logger.LogWarning("Invalid model state for transfer creation.");
-                return View("Transfers", GetIndexViewModel);
-            }
 
             try{
 
