@@ -1,6 +1,6 @@
 ﻿CREATE PROCEDURE [dbo].[sp_pendingaccount_insert]
-	@id_user INT,
-    @id_worker INT,
+	@id_user Nvarchar(450),
+    @id_worker Nvarchar(450),
     @motive NVARCHAR(100),
     @account_state INT  
 AS

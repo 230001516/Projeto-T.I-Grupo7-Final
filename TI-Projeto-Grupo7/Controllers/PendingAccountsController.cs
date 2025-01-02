@@ -45,6 +45,7 @@ namespace TI_Projeto_Grupo7.Controllers
                 PendingAccountsDTO dto = new PendingAccountsDTO();
                 dto.id_user = model.id_user;
                 dto.motive = model.motive;
+                dto.id_worker = model.id_worker;
                 dto.account_state = model.account_state;
 
                 ExecutionResult<PendingAccountsDTO> result = _pendingAccountsService.Insert(dto, GetUsername());

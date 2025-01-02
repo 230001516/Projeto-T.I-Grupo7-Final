@@ -68,8 +68,8 @@ namespace TI_Projeto_Grupo7.Services
                 int result;
 
                 DynamicParameters parameters = new DynamicParameters();
-                parameters.Add("@id_user", dto.id_user, DbType.Int32, ParameterDirection.Input);
-                parameters.Add("@id_worker", dto.id_worker, DbType.Int32, ParameterDirection.Input);
+                parameters.Add("@id_user", dto.id_user, DbType.String, ParameterDirection.Input);
+                parameters.Add("@id_worker", dto.id_worker, DbType.String, ParameterDirection.Input);
                 parameters.Add("@account_state", dto.account_state, DbType.Int32, ParameterDirection.Input);
                 parameters.Add("@motive", dto.motive, DbType.String, ParameterDirection.Input);
 
@@ -110,8 +110,8 @@ namespace TI_Projeto_Grupo7.Services
 
                 DynamicParameters parameters = new DynamicParameters();
                 parameters.Add("@id_accountPending", dto.id_accountPending, DbType.Int32, ParameterDirection.Input);
-                parameters.Add("@id_user", dto.id_user, DbType.Int32, ParameterDirection.Input);
-                parameters.Add("@id_worker", dto.id_worker, DbType.Int32, ParameterDirection.Input);
+                parameters.Add("@id_user", dto.id_user, DbType.String, ParameterDirection.Input);
+                parameters.Add("@id_worker", dto.id_worker, DbType.String, ParameterDirection.Input);
                 parameters.Add("@account_state", dto.account_state, DbType.Int32, ParameterDirection.Input);
                 parameters.Add("@motive", dto.motive, DbType.String, ParameterDirection.Input);
 

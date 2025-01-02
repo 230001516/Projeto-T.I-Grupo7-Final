@@ -3,7 +3,7 @@
     public class workersDTO
     {
 
-        public int id_user {  get; set; }
+        public string id_user {  get; set; }
 
         public int work_hours { get; set; }
     }

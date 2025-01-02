@@ -36,7 +36,7 @@ namespace TI_Projeto_Grupo7.Areas.Identity.Pages.Account
         private readonly IUserEmailStore<ApplicationUser> _emailStore;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
-        private readonly UsersService _usersService;
+        private readonly PendingAccountsService _paService;
         private readonly IEmailService _emailService;
 
         public RegisterModel(
@@ -45,7 +45,7 @@ namespace TI_Projeto_Grupo7.Areas.Identity.Pages.Account
             SignInManager<ApplicationUser> signInManager,
             ILogger<RegisterModel> logger,
             IEmailSender emailSender,
-            UsersService usersService, IEmailService emailService)
+            PendingAccountsService paService, IEmailService emailService)
         {
             _userManager = userManager;
             _userStore = userStore;
@@ -53,7 +53,7 @@ namespace TI_Projeto_Grupo7.Areas.Identity.Pages.Account
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
-            _usersService = usersService;
+            _paService = paService;
             _emailService = emailService;
         }
 
@@ -164,28 +164,49 @@ namespace TI_Projeto_Grupo7.Areas.Identity.Pages.Account
 
                 if (result.Succeeded)
                 {
+                    
                     _logger.LogInformation("User created a new account with password.");
 
-                    var userId = await _userManager.GetUserIdAsync(user);
-                    var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-                    code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
-                    var callbackUrl = Url.Page(
-                        "/Account/ConfirmEmail",
-                        pageHandler: null,
-                        values: new { area = "Identity", userId = userId, code = code, returnUrl = returnUrl },
-                        protocol: Request.Scheme);
-
-                    await _emailService.SendEmailAsync(Input.Email, "Confirm your email",
-                        $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
-
-                    if (_userManager.Options.SignIn.RequireConfirmedAccount)
+                    try
                     {
-                        return RedirectToPage("RegisterConfirmation", new { email = Input.Email, returnUrl = returnUrl });
+                        var pendingAccount = new PendingAccountsDTO
+                        {
+                            id_user = user.Id,
+                            account_state = 0, // Pending
+                            id_worker = null,
+                            motive = "Account pending approval"
+                        };
+
+                        _paService.Insert(pendingAccount, user.UserName);
+                        _logger.LogInformation("User added to PendingAccounts table.");
+
+                        var userId = await _userManager.GetUserIdAsync(user);
+                        var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                        code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
+                        var callbackUrl = Url.Page(
+                            "/Account/ConfirmEmail",
+                            pageHandler: null,
+                            values: new { area = "Identity", userId = userId, code = code, returnUrl = returnUrl },
+                            protocol: Request.Scheme);
+
+                        await _emailService.SendEmailAsync(Input.Email, "Confirm your email",
+                            $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+
+                        if (_userManager.Options.SignIn.RequireConfirmedAccount)
+                        {
+                            return RedirectToPage("RegisterConfirmation", new { email = Input.Email, returnUrl = returnUrl });
+                        }
+                        else
+                        {
+                            await _signInManager.SignInAsync(user, isPersistent: false);
+                            return LocalRedirect(returnUrl);
+                        }
                     }
-                    else
+                    catch (Exception ex)
                     {
-                        await _signInManager.SignInAsync(user, isPersistent: false);
-                        return LocalRedirect(returnUrl);
+                        _logger.LogError(ex, "Error adding user to PendingAccounts.");
+                        ModelState.AddModelError(string.Empty, "An error occurred while processing your registration. Please try again later.");
+                        return Page();
                     }
                 }
                 foreach (var error in result.Errors)
