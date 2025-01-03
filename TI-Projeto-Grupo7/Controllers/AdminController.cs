@@ -1,9 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 namespace TI_Projeto_Grupo7.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class AdminController : Controller
     {
+        
         public IActionResult Index()
         {
             return View();

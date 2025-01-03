@@ -10,7 +10,7 @@ namespace TI_Projeto_Grupo7.Services
     public class AccountsService
     {
         private readonly MyOptions _myOptions;
-        private readonly ILogger<AccountsService> _logger; 
+        private readonly ILogger<AccountsService> _logger;
 
         public AccountsService(IOptions<MyOptions> myOptions, ILogger<AccountsService> logger)
         {
@@ -143,7 +143,7 @@ namespace TI_Projeto_Grupo7.Services
                 return new ExecutionResultFactory<AccountsDTO>().GetFailedExecutionResult("An unexpected error occurred.");
 
             }
-        }
+        }    
     }
 }
 

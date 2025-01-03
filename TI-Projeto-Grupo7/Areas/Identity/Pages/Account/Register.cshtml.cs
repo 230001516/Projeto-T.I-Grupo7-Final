@@ -164,7 +164,8 @@ namespace TI_Projeto_Grupo7.Areas.Identity.Pages.Account
 
                 if (result.Succeeded)
                 {
-                    
+                    await _userManager.AddToRoleAsync(user, Enums.Roles.User.ToString());
+
                     _logger.LogInformation("User created a new account with password.");
 
                     try

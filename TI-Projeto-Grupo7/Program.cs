@@ -7,9 +7,23 @@ using Microsoft.Extensions.Options;
 using TI_Projeto_Grupo7.Services;
 using Serilog;
 using Serilog.Sinks.MSSqlServer;
+using TI_Projeto_Grupo7.Areas.Identity.Data;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("BankDbContextConnection") ?? throw new InvalidOperationException("Connection string 'BankDbContextConnection' not found.");
+
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options =>
+    {
+        options.LoginPath = "/Identity/Account/Login"; 
+    });
+
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("Admin", policy => policy.RequireRole("Admin"));
+    options.AddPolicy("Worker", policy => policy.RequireRole("Worker"));
+});
 
 builder.Services.AddDbContext<BankDbContext>(options => options.UseSqlServer(connectionString));
 builder.Services.AddSingleton<IEmailService>(new EmailService(
@@ -18,7 +32,8 @@ builder.Services.AddSingleton<IEmailService>(new EmailService(
     fromEmail: "noreplytigrupo7@gmail.com",
     password: "xzzz jimj adtu pufr"
 ));
-builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<BankDbContext>();
+
+builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true).AddRoles<IdentityRole>().AddEntityFrameworkStores<BankDbContext>();
 
 var sinkOptions = new MSSqlServerSinkOptions
 {
@@ -72,4 +87,26 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.MapRazorPages();
+
+using (var scope = app.Services.CreateScope()){
+
+    var services = scope.ServiceProvider;
+    var loggerFactory = services.GetRequiredService<ILoggerFactory>();
+
+    try{
+
+        var context = services.GetRequiredService<BankDbContext>();
+        var userManager = services.GetRequiredService<UserManager<ApplicationUser>>();
+        var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
+
+        await ContextSeed.SeedRolesAsync(userManager, roleManager);
+        await ContextSeed.SeedAdminAsync(userManager, roleManager);
+    
+    }catch(Exception ex){
+
+        var logger = loggerFactory.CreateLogger<Program>();
+        logger.LogError(ex, "An error occured seeding the DataBase.");
+    }
+}
+
 app.Run();
