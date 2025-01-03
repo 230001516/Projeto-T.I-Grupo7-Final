@@ -28,6 +28,15 @@ namespace TI_Projeto_Grupo7.Areas.Identity.Pages.Account
         {
             await _signInManager.SignOutAsync();
             _logger.LogInformation("User logged out.");
+            
+            HttpContext.Session.Clear();
+
+            // Clear cookies manually if needed
+            foreach (var cookie in Request.Cookies.Keys)
+            {
+                Response.Cookies.Delete(cookie);
+            }
+
             if (returnUrl != null)
             {
                 return LocalRedirect(returnUrl);

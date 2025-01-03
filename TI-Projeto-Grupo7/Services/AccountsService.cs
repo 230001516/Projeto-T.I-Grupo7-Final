@@ -11,6 +11,7 @@ namespace TI_Projeto_Grupo7.Services
     {
         private readonly MyOptions _myOptions;
         private readonly ILogger<AccountsService> _logger;
+        private readonly PendingAccountsService _pendingAccounts;
 
         public AccountsService(IOptions<MyOptions> myOptions, ILogger<AccountsService> logger)
         {
@@ -143,7 +144,70 @@ namespace TI_Projeto_Grupo7.Services
                 return new ExecutionResultFactory<AccountsDTO>().GetFailedExecutionResult("An unexpected error occurred.");
 
             }
-        }    
+        }
+
+        public ExecutionResult<AccountsDTO> ProcessApprovedAccount(int id_pendingAccount, string username)
+        {
+            try
+            {
+
+                var pendingAccountResult = _pendingAccounts.Get(id_pendingAccount);
+
+                if (!pendingAccountResult.Status || pendingAccountResult.Results == null || !pendingAccountResult.Results.Any())
+                {
+                    return new ExecutionResultFactory<AccountsDTO>().GetFailedExecutionResult("Pending account not found.");
+                }
+
+                var pendingAccount = pendingAccountResult.Results.FirstOrDefault();
+
+                if (pendingAccount.account_state != 1)
+                {
+                    return new ExecutionResultFactory<AccountsDTO>().GetFailedExecutionResult("Pending account is not approved.");
+                }
+
+                var newAccount = new AccountsDTO
+                {
+                    id_pendingAccount = pendingAccount.id_accountPending,
+                    account_number = GenerateAccountNumber(IsAccountNumberUnique),
+                    balance = 0 
+                };
+
+                return Insert(newAccount, username);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error processing approved account for pending account ID: {id_pendingAccount}", id_pendingAccount);
+                return new ExecutionResultFactory<AccountsDTO>().GetFailedExecutionResult("An error occurred while processing the approved account.");
+            }
+        }
+        private bool IsAccountNumberUnique(int accountNumber)
+        {
+            var result = Get();
+
+            if (!result.Status)
+            {
+                _logger.LogError("Failed to retrieve accounts to validate account number uniqueness.");
+                throw new InvalidOperationException("Unable to validate account number uniqueness.");
+            }
+
+            var existingAccountNumbers = result.Results?.Select(a => a.account_number).ToList();
+
+            return existingAccountNumbers == null || !existingAccountNumbers.Contains(accountNumber);
+        }
+
+        private int GenerateAccountNumber(Func<int, bool> isAccountNumberUnique)
+        {
+            var random = new Random();
+            int accountNumber;
+
+            do
+            {
+                accountNumber = random.Next(1000000000, int.MaxValue);
+            }
+            while (!isAccountNumberUnique(accountNumber)); 
+
+            return accountNumber;
+        }
     }
 }
 

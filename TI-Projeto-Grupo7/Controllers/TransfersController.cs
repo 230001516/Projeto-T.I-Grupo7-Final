@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace TI_Projeto_Grupo7.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "User")]
     public class TransfersController : Controller
     {
         private readonly TransferService _transferService;
