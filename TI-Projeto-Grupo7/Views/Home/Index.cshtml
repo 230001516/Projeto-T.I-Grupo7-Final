@@ -77,6 +77,7 @@
                                     <li><a href="@Url.Action("Transfers","Transfers")">Transfers</a></li>
                                     <li><a href="@Url.Action("TransfersHistory","Transfers")">Transfers History</a></li>
                                     <li><a href="/Identity/Account/Manage">Profile</a></li>
+                                    <li><a href="/Admin/dashboard">Admin</a></li>
                                     <li>
                                         <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("", new { area = "" })" method="post" style="display: inline;">
                                             @Html.AntiForgeryToken()
