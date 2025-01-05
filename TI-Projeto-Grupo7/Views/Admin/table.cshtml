@@ -100,7 +100,20 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-
+                                    @foreach (var pendingAccount in Model.PendingAccounts)
+                                    {
+                                    <tr>
+                                        <td>@pendingAccount.id_accountPending</td>
+                                        <td>@pendingAccount.id_user</td>
+                                        <td>@pendingAccount.account_state</td>
+                                        <td>@pendingAccount.id_worker</td>
+                                        <td>@pendingAccount.motive</td>
+                                        <td>
+                                             <button class="btn btn-success btn-sm" onclick="acceptAccount('@pendingAccount.id_accountPending')">Accept</button>
+                                             <button class="btn btn-danger btn-sm" onclick="denyAccount('@pendingAccount.id_accountPending')">Reject</button>
+                                        </td>
+                                    </tr>
+                                     }
                                         </tbody>
                                     </table>
                                 </div>
@@ -126,7 +139,19 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-
+                                    @foreach (var ticket in Model.Support)
+                                    {
+                                        <tr>
+                                        <td>@ticket.id_ticket</td>
+                                        <td>@ticket.supName</td>
+                                        <td>@ticket.email</td>
+                                        <td>@ticket.subject</td>
+                                        <td>@ticket.message</td>
+                                        <td>
+                                        <button class="btn btn-primary btn-sm" onclick="openReplyModal('@ticket.id_ticket')">Responder</button>
+                                        </td>
+                                        </tr>
+                                    }
                                         </tbody>
                                     </table>
                                 </div>
