@@ -15,7 +15,7 @@ var connectionString = builder.Configuration.GetConnectionString("BankDbContextC
 
 builder.Services.AddSession(options =>
 {
-    options.IdleTimeout = TimeSpan.FromMinutes(30); // Set session timeout
+    options.IdleTimeout = TimeSpan.FromMinutes(30); 
     options.Cookie.HttpOnly = true;
     options.Cookie.IsEssential = true;
 });
@@ -62,6 +62,7 @@ builder.Logging.AddSerilog();
 builder.Services.AddScoped<UsersService>();
 builder.Services.AddTransient<TransferService>();
 builder.Services.AddScoped<PendingAccountsService>();
+builder.Services.AddScoped<SupportService>();
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
 builder.Services.AddHttpContextAccessor();

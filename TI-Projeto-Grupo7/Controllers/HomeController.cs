@@ -76,12 +76,12 @@ namespace TI_Projeto_Grupo7.Controllers
 
             if (!result.Status){
 
-                _loggerDev.LogWarning("Failed to create ticket: {Message}", result.Message);
+                _loggerSup.LogWarning("Failed to create ticket: {Message}", result.Message);
                 return View("Index", model);
 
             }
 
-            _loggerDev.LogInformation("Successfully created ticket: {Subject}", dto.subject);
+            _loggerSup.LogInformation("Successfully created ticket: {Subject}", dto.subject);
             return RedirectToAction("Index");
         }
 
@@ -144,12 +144,12 @@ namespace TI_Projeto_Grupo7.Controllers
 
             if (!results.Status){
 
-                _loggerDev.LogWarning("Failed to edit ticket: {Message}", results.Message);
+                _loggerSup.LogWarning("Failed to edit ticket: {Message}", results.Message);
                 return View("Index", model);
 
             }
 
-            _loggerDev.LogInformation("Successfully edited ticket: {Subject}", support.subject);
+            _loggerSup.LogInformation("Successfully edited ticket: {Subject}", support.subject);
             return RedirectToAction("Index");
 
         }
@@ -180,7 +180,7 @@ namespace TI_Projeto_Grupo7.Controllers
 
             if (!results.Status){
 
-                _loggerDev.LogWarning("Failed to delete support ticket: {Message}", results.Message);
+                _loggerSup.LogWarning("Failed to delete support ticket: {Message}", results.Message);
                 return BadRequest(results.Message);
 
             }

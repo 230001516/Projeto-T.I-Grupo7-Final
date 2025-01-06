@@ -100,8 +100,9 @@
                                         <th>Ações</th>
                                     </tr>
                                 </thead>
-                                @foreach(var User in Model.AspNetUsers){
                                 <tbody id="userTable">
+                                @foreach (var User in Model.AspNetUsers)
+                                {
                                     <tr>
                                         <td>@User.Id</td>
                                         <td>@User.FirstName</td>
@@ -116,8 +117,8 @@
                                             <button class="btn btn-danger btn-sm" onclick="removeUser(1)">Remove</button>
                                         </td>
                                     </tr>
+                                    }
                                 </tbody>
-                                }
                             </table>
                         </div>
                         <div class="card-footer">

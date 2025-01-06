@@ -1,18 +1,44 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
+using System.Runtime.CompilerServices;
 using System.Security.Claims;
+using TI_Grupo7.Areas.Identity.Data;
 using TI_Projeto_Grupo7.Helpers;
+using TI_Projeto_Grupo7.Models.DTO;
+using TI_Projeto_Grupo7.Models.ViewsModels.Admin;
 using TI_Projeto_Grupo7.Services;
+using Microsoft.EntityFrameworkCore;
 
 namespace TI_Projeto_Grupo7.Controllers
 {
     [Authorize(Roles = "Admin")]
     public class AdminController : Controller
     {
-        public IActionResult Index()
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly PendingAccountsService _pendingAccountsService;
+        private readonly SupportService _supportService;
+        private readonly ILogger<PendingAccountsService> _loggerPA;
+        private readonly ILogger<SupportService> _loggerSup;
+
+        public AdminController(IOptions<MyOptions> myoptions, 
+            IHttpContextAccessor httpContextAccessor,
+            UserManager<ApplicationUser> userManager,
+            ILogger<PendingAccountsService> loggerPA,
+            ILogger<SupportService> loggerSup)
         {
-            return View();
+            _userManager = userManager;
+            _pendingAccountsService = new PendingAccountsService(myoptions, loggerPA);
+            _supportService = new SupportService(myoptions, loggerSup);
+            _loggerPA = loggerPA;
+            _loggerSup = loggerSup;
+        }
+        public async Task<IActionResult> Index()
+        {
+            var model = await GetIndexViewModel();
+            return View(model);
         }
 
         public IActionResult dashboard()
@@ -30,6 +56,21 @@ namespace TI_Projeto_Grupo7.Controllers
         public IActionResult user()
         {
             return View();
+        }
+
+        private async Task<AdminIndexViewModel> GetIndexViewModel()
+        {
+            var model = new AdminIndexViewModel();
+            model.AspNetUsers = await _userManager.Users.ToListAsync();
+            model.PendingAccounts = _pendingAccountsService.Get().Results;
+            model.Support = _supportService.Get().Results;
+                
+            return model;
+        }
+
+        private string GetUsername()
+        {
+            return _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.Name);
         }
     }
 }
