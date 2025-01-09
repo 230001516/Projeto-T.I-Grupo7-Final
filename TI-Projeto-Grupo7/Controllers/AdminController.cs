@@ -10,6 +10,9 @@ using TI_Projeto_Grupo7.Models.DTO;
 using TI_Projeto_Grupo7.Models.ViewsModels.Admin;
 using TI_Projeto_Grupo7.Services;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Builder.Extensions;
+using Application.Data;
+using System.Text.Encodings.Web;
 
 namespace TI_Projeto_Grupo7.Controllers
 {
@@ -20,25 +23,29 @@ namespace TI_Projeto_Grupo7.Controllers
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly PendingAccountsService _pendingAccountsService;
         private readonly SupportService _supportService;
+        private readonly AccountsService _accountsService;
         private readonly ILogger<PendingAccountsService> _loggerPA;
         private readonly ILogger<SupportService> _loggerSup;
+        private readonly ILogger<AccountsService> _loggerAcc;
 
-        public AdminController(IOptions<MyOptions> myoptions, 
+        public AdminController(IOptions<MyOptions> myoptions,
             IHttpContextAccessor httpContextAccessor,
             UserManager<ApplicationUser> userManager,
             ILogger<PendingAccountsService> loggerPA,
-            ILogger<SupportService> loggerSup)
+            ILogger<SupportService> loggerSup,
+            ILogger<AccountsService> loggerAcc)
         {
             _userManager = userManager;
             _pendingAccountsService = new PendingAccountsService(myoptions, loggerPA);
             _supportService = new SupportService(myoptions, loggerSup);
+            _accountsService = new AccountsService(myoptions, loggerAcc);
             _loggerPA = loggerPA;
             _loggerSup = loggerSup;
+            _loggerAcc = loggerAcc;
         }
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            var model = await GetIndexViewModel();
-            return View(model);
+            return View();
         }
 
         public IActionResult dashboard()
@@ -51,22 +58,18 @@ namespace TI_Projeto_Grupo7.Controllers
         }
         public IActionResult table()
         {
-            return View();
+            var model = new AdminIndexViewModel();
+            model.PendingAccounts = _pendingAccountsService.Get().Results;
+            model.Support = _supportService.Get().Results;
+            return View(model);
         }
         public IActionResult user()
         {
-            return View();
+            var model = new AdminIndexViewModel();
+            model.AspNetUsers = _userManager.Users.ToList();
+            return View(model);
         }
 
-        private async Task<AdminIndexViewModel> GetIndexViewModel()
-        {
-            var model = new AdminIndexViewModel();
-            model.AspNetUsers = await _userManager.Users.ToListAsync();
-            model.PendingAccounts = _pendingAccountsService.Get().Results;
-            model.Support = _supportService.Get().Results;
-                
-            return model;
-        }
 
         private string GetUsername()
         {
