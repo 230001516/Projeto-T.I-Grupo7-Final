@@ -13,7 +13,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Builder.Extensions;
 using Application.Data;
 using System.Text.Encodings.Web;
-using TI_Projeto_Grupo7.Models.ViewsModels.PendingAccounts;
+using TI_Projeto_Grupo7.Models.ViewsModels.Accounts;
+
 
 namespace TI_Projeto_Grupo7.Controllers
 {
@@ -66,6 +67,8 @@ namespace TI_Projeto_Grupo7.Controllers
             return View(GetIndexViewModel());
         }
 
+
+        // Pending Accounts Actions
         public IActionResult EditPendAcc(int id_accountPending)
         {
             AdminEditViewModel model = new AdminEditViewModel();
@@ -116,7 +119,7 @@ namespace TI_Projeto_Grupo7.Controllers
             }
         }
 
-        public IActionResult Delete(int id_accountPending)
+        public IActionResult DeletePendAcc(int id_accountPending)
         {
             try
             {
@@ -150,12 +153,125 @@ namespace TI_Projeto_Grupo7.Controllers
             }
         }
 
+        // Accounts Actions
+        public IActionResult DeleteAcc(int id_account)
+        {
+            try
+            {
+                AdminIndexViewModel model = new AdminIndexViewModel();
+
+                ExecutionResult<AccountsDTO> result = _accountsService.Delete(id_account);
+                if (!result.Status)
+                {
+
+                    _loggerAcc.LogWarning("Failed to delete Account: {Message}", result.Message);
+                    return View("Login", model);
+
+                }
+
+                _loggerAcc.LogInformation("Account successfully deleted with ID: {id_account}", result.Results?.id_account);
+                return RedirectToAction("Login");
+
+            }
+            catch (Exception ex)
+            {
+
+                _loggerAcc.LogError(ex, "An error occurred while deleting the account.");
+                ModelState.AddModelError(string.Empty, "An unexpected error occurred. Please try again later.");
+                return View("Index");
+            }
+        }
+
+        public IActionResult EditAcc(int id_account)
+        {
+            AdminEditViewModel model = new AdminEditViewModel();
+
+            AccountsDTO dto = _accountsService.Get(id_account).Results.FirstOrDefault();
+            dto.id_account = model.id_account;
+            dto.id_pendingAccount = model.id_pendingAccount;
+            dto.account_number = model.account_number;
+            dto.balance = model.balance;
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public IActionResult EditAcc(AdminEditViewModel model)
+        {
+            try
+            {
+
+                AccountsDTO dto = new AccountsDTO();
+                dto.id_account = model.id_account;
+                dto.id_pendingAccount = model.id_pendingAccount;
+                dto.account_number = model.account_number;
+                dto.balance = model.balance;
+
+                ExecutionResult<AccountsDTO> result = _accountsService.Update(dto, GetUsername());
+
+                if (!result.Status)
+                {
+
+                    _loggerAcc.LogWarning("Failed to update Account: {Message}", result.Message);
+                    return View("Login", model);
+
+                }
+
+                _loggerAcc.LogInformation("Account successfully updated with ID: {id_account}", result.Results?.id_account);
+                return RedirectToAction("Login");
+
+            }
+            catch (Exception ex)
+            {
+
+                _loggerAcc.LogError(ex, "An error occurred while updating the account.");
+                ModelState.AddModelError(string.Empty, "An unexpected error occurred. Please try again later.");
+                return View("Index", model);
+            }
+        }
+
+        [HttpPost]
+        public IActionResult CreateAcc(AdminCreateViewModel model)
+        {
+            try
+            {
+                AccountsDTO dto = new AccountsDTO();
+                dto.id_account = model.id_account;
+                dto.id_pendingAccount = model.id_pendingAccount;
+                dto.account_number = model.account_number;
+                dto.balance = model.balance = 0;
+
+                ExecutionResult<AccountsDTO> result = _accountsService.Insert(dto, GetUsername());
+
+                if (!result.Status)
+                {
+
+                    _loggerAcc.LogWarning("Failed to create account: {Message}", result.Message);
+                    return View("table", model);
+                }
+
+                _loggerAcc.LogInformation("Account successfully created with ID: {id_account}", result.Results?.id_account);
+                return RedirectToAction("table");
+
+            }
+            catch (Exception ex)
+            {
+
+                _loggerAcc.LogError(ex, "An error occurred while creating the account.");
+                ModelState.AddModelError(string.Empty, "An unexpected error occurred. Please try again later.");
+                return View("table", model);
+            }
+        }
+        
+
+        // Private methods
         private AdminIndexViewModel GetIndexViewModel()
         {
             AdminIndexViewModel model = new AdminIndexViewModel();
             model.PendingAccounts = _pendingAccountsService.Get().Results;
             model.AspNetUsers = _userManager.Users.ToList();
             model.Support = _supportService.Get().Results;
+            model.Accounts = _accountsService.Get().Results;
 
             return model;
         }

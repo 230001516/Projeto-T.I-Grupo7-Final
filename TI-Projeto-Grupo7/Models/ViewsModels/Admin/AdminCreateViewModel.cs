@@ -64,5 +64,15 @@ namespace TI_Projeto_Grupo7.Models.ViewsModels.Admin
 
         [Required]
         public string motive { get; set; }
+
+        // Accounts 
+        [Required]
+        public int id_account { get; set; }
+        [Required]
+        public int id_pendingAccount { get; set; }
+        [Required]
+        public decimal balance { get; set; }
+        [Required]
+        public int account_number { get; set; }
     }
 }

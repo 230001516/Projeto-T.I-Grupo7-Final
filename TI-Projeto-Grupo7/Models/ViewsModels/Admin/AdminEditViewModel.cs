@@ -7,7 +7,12 @@ namespace TI_Projeto_Grupo7.Models.ViewsModels.Admin
 
         // Users
         [Required]
-        public int Id { get; set; }
+        public string Id { get; set; }
+        
+        [Required]
+        public int is_worker { get; set; }
+
+        [Required] public string UserName { get; set; }
 
         [Required]
         public string Firstname { get; set; }
@@ -63,5 +68,18 @@ namespace TI_Projeto_Grupo7.Models.ViewsModels.Admin
 
         [Required]
         public string motive { get; set; }
+
+        // Accounts
+
+        [Required]
+        public int id_account { get; set; }
+        [Required]
+        public int id_pendingAccount { get; set; }
+        [Required]
+        public decimal balance { get; set; }
+        [Required]
+        public int account_number { get; set; }
+
+
     }
 }
