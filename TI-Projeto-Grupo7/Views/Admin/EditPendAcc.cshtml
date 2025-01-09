@@ -4,25 +4,25 @@
 
 <h1>Edit</h1>
 
-<form method="post">
+<a href="@Url.Action("dashboard")">Voltar</a>
 
     <a href="@Url.Action("table")">Voltar</a>
 
-    <p>ID Pending Account</p>
     <input asp-for="id_accountPending" type="int" />
 
-    <p>ID User</p>
     <input asp-for="id_user" type="text" />
 
-    <p>Account State</p>
     <input asp-for="account_state" type="int" />
 
-    <p>ID Worker</p>
     <input asp-for="id_worker" type="text" />
 
-    <p>Motive</p>
     <input asp-for="motive" type="text" />
 
-    <input type="submit" />
+    <div>
+        <label asp-for="motive"></label>
+        <input asp-for="motive" />
+        <span asp-validation-for="motive"></span>
+    </div>
 
+    <button type="submit">Save</button>
 </form>

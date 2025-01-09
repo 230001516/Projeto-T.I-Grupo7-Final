@@ -9,6 +9,7 @@ using Serilog;
 using Serilog.Sinks.MSSqlServer;
 using TI_Projeto_Grupo7.Areas.Identity.Data;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Http;
 
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("BankDbContextConnection") ?? throw new InvalidOperationException("Connection string 'BankDbContextConnection' not found.");
@@ -63,6 +64,7 @@ builder.Services.AddScoped<UsersService>();
 builder.Services.AddTransient<TransferService>();
 builder.Services.AddScoped<PendingAccountsService>();
 builder.Services.AddScoped<SupportService>();
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
 builder.Services.AddHttpContextAccessor();
