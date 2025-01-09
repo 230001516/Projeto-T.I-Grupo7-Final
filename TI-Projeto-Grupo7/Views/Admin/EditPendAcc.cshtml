@@ -1,0 +1,21 @@
+﻿@model TI_Projeto_Grupo7.Models.ViewsModels.Admin.AdminEditViewModel;
+
+<h1>Edit</h1>
+
+<a href="@Url.Action("dashboard")">Voltar</a>
+
+<form method="post">
+
+    <input asp-for="id_accountPending" type="int" />
+
+    <input asp-for="id_user" type="text" />
+
+    <input asp-for="account_state" type="int" />
+
+    <input asp-for="id_worker" type="text" />
+
+    <input asp-for="motive" type="text" />
+
+    <input type="submit" />
+
+</form>

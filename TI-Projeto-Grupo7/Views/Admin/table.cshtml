@@ -13,6 +13,9 @@
 
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 -->
+@model TI_Projeto_Grupo7.Models.ViewsModels.Admin.AdminIndexViewModel;
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -55,12 +58,6 @@
                         <a href="@Url.Action("dashboard","Admin")">
                             <i class="tim-icons icon-chart-pie-36"></i>
                             <p>Dashboard</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="@Url.Action("notifications","Admin")">
-                            <i class="tim-icons icon-bell-55"></i>
-                            <p>Notifications</p>
                         </a>
                     </li>
                     <li>
@@ -108,10 +105,10 @@
                                         <td>@pendingAccount.account_state</td>
                                         <td>@pendingAccount.id_worker</td>
                                         <td>@pendingAccount.motive</td>
-                                        <td>
-                                             <button class="btn btn-success btn-sm" onclick="acceptAccount('@pendingAccount.id_accountPending')">Accept</button>
-                                             <button class="btn btn-danger btn-sm" onclick="denyAccount('@pendingAccount.id_accountPending')">Reject</button>
-                                        </td>
+                                                    <td>
+                                                        <a class="btn btn-success btn-sm" href="@Url.Action("EditPendAcc", "Admin", new {id_accountPending = pendingAccount.id_accountPending })">Edit</a>
+                                                        <a class="btn btn-danger btn-sm" href="@Url.Action("Delete", "Admin", new {id_accountPending = pendingAccount.id_accountPending })">Delete</a>
+                                                    </td>
                                     </tr>
                                      }
                                         </tbody>

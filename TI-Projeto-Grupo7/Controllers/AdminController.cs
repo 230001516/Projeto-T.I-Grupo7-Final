@@ -13,6 +13,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Builder.Extensions;
 using Application.Data;
 using System.Text.Encodings.Web;
+using TI_Projeto_Grupo7.Models.ViewsModels.PendingAccounts;
 
 namespace TI_Projeto_Grupo7.Controllers
 {
@@ -74,6 +75,98 @@ namespace TI_Projeto_Grupo7.Controllers
         private string GetUsername()
         {
             return _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.Name);
+        }
+
+        public IActionResult EditPendAcc(int id_accountPending)
+        {
+            AdminEditViewModel model = new AdminEditViewModel();
+
+            PendingAccountsDTO dto = _pendingAccountsService.Get(id_accountPending).Results.FirstOrDefault();
+            model.id_accountPending = dto.id_accountPending;
+            model.id_user = dto.id_user;
+            model.id_worker = dto.id_worker;
+            model.account_state = dto.account_state;
+            model.motive = dto.motive;
+
+            return View("EditPendAcc", model);
+        }
+
+        [HttpPost]
+        public IActionResult EditPendAcc(AdminEditViewModel model)
+        {
+            try
+            {
+
+                PendingAccountsDTO dto = new PendingAccountsDTO();
+                model.id_accountPending = dto.id_accountPending;
+                model.id_user = dto.id_user;
+                model.id_worker = dto.id_worker;
+                model.account_state = dto.account_state;
+                model.motive = dto.motive;
+
+                ExecutionResult<PendingAccountsDTO> result = _pendingAccountsService.Update(dto, GetUsername());
+
+                if (!result.Status)
+                {
+
+                    _loggerPA.LogWarning("Failed to update Pending Account: {Message}", result.Message);
+                    return View("Login", model);
+
+                }
+
+                _loggerPA.LogInformation("Pending Account successfully updated with ID: {id_accountPending}", result.Results?.id_accountPending);
+                return RedirectToAction("Login");
+
+            }
+            catch (Exception ex)
+            {
+
+                _loggerPA.LogError(ex, "An error occurred while creating the pending account.");
+                ModelState.AddModelError(string.Empty, "An unexpected error occurred. Please try again later.");
+                return View("EditPendAcc", model);
+            }
+        }
+
+        public IActionResult Delete(int id_accountPending)
+        {
+            try
+            {
+                if (id_accountPending <= 0)
+                {
+                    _loggerPA.LogWarning("Invalid ID for deletion.");
+                    return RedirectToAction("dashboard");
+                }
+
+                AdminIndexViewModel model = new AdminIndexViewModel();
+
+                ExecutionResult<PendingAccountsDTO> result = _pendingAccountsService.Delete(id_accountPending);
+                if (!result.Status)
+                {
+
+                    _loggerPA.LogWarning("Failed to delete Pending Account: {Message}", result.Message);
+                    return View("table", model);
+
+                }
+
+                _loggerPA.LogInformation("Pending Account successfully deleted with ID: {id_accountPending}", result.Results?.id_accountPending);
+                return RedirectToAction("table");
+
+            }
+            catch (Exception ex)
+            {
+
+                _loggerPA.LogError(ex, "An error occurred while creating the pending account.");
+                ModelState.AddModelError(string.Empty, "An unexpected error occurred. Please try again later.");
+                return View("Index");
+            }
+        }
+
+        private AdminIndexViewModel GetIndexViewModel()
+        {
+            AdminIndexViewModel model = new AdminIndexViewModel();
+            model.PendingAccounts = _pendingAccountsService.Get().Results;
+
+            return model;
         }
     }
 }

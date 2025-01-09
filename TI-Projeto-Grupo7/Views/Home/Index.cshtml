@@ -21,7 +21,9 @@
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com" rel="preconnect">
     <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;
+    1,400;1,500;1,700;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;
+    1,700;1,800;1,900&family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
     <!-- Vendor CSS Files -->
     <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -32,14 +34,6 @@
 
     <!-- Main CSS File -->
     <link href="~/assets/css/main.css" rel="stylesheet">
-
-    <!-- =======================================================
-    * Template Name: Flexor
-    * Template URL: https://bootstrapmade.com/flexor-free-multipurpose-bootstrap-template/
-    * Updated: Aug 07 2024 with Bootstrap v5.3.3
-    * Author: BootstrapMade.com
-    * License: https://bootstrapmade.com/license/
-    ======================================================== -->
 </head>
 
 <body class="index-page">
@@ -81,7 +75,8 @@
                                     <li>
                                         <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("", new { area = "" })" method="post" style="display: inline;">
                                             @Html.AntiForgeryToken()
-                                            <button type="submit" style="color: #333; background: none; border: none; text-decoration: none; padding-left: 20px;padding-top:5px; margin: 0; cursor: pointer; transition: color 0.3s;"
+                                            <button type="submit" style="color: #333; background: none; border: none; 
+                                                    text-decoration: none; padding-left: 20px;padding-top:5px; margin: 0; cursor: pointer; transition: color 0.3s;"
                                                     onmouseover="this.style.color='#ff5821'"
                                                     onmouseout="this.style.color='#333'">
                                                 Logout
@@ -181,7 +176,6 @@
                 </div><!-- End  Content-->
 
             </div>
-
         </section><!-- /Hero Section -->
         <!-- About Section -->
         <section id="about" class="about section light-background">
@@ -536,5 +530,4 @@
     <script src="assets/js/main.js"></script>
 
 </body>
-
 </html>
