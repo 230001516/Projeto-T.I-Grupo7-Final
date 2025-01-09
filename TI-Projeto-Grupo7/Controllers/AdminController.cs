@@ -59,22 +59,11 @@ namespace TI_Projeto_Grupo7.Controllers
         }
         public IActionResult table()
         {
-            var model = new AdminIndexViewModel();
-            model.PendingAccounts = _pendingAccountsService.Get().Results;
-            model.Support = _supportService.Get().Results;
-            return View(model);
+            return View(GetIndexViewModel());
         }
         public IActionResult user()
         {
-            var model = new AdminIndexViewModel();
-            model.AspNetUsers = _userManager.Users.ToList();
-            return View(model);
-        }
-
-
-        private string GetUsername()
-        {
-            return _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.Name);
+            return View(GetIndexViewModel());
         }
 
         public IActionResult EditPendAcc(int id_accountPending)
@@ -110,18 +99,18 @@ namespace TI_Projeto_Grupo7.Controllers
                 {
 
                     _loggerPA.LogWarning("Failed to update Pending Account: {Message}", result.Message);
-                    return View("Login", model);
+                    return View("EditPendAcc", model);
 
                 }
 
                 _loggerPA.LogInformation("Pending Account successfully updated with ID: {id_accountPending}", result.Results?.id_accountPending);
-                return RedirectToAction("Login");
+                return RedirectToAction("table", model);
 
             }
             catch (Exception ex)
             {
 
-                _loggerPA.LogError(ex, "An error occurred while creating the pending account.");
+                _loggerPA.LogError(ex, "An error occurred while editing the pending account.");
                 ModelState.AddModelError(string.Empty, "An unexpected error occurred. Please try again later.");
                 return View("EditPendAcc", model);
             }
@@ -165,8 +154,14 @@ namespace TI_Projeto_Grupo7.Controllers
         {
             AdminIndexViewModel model = new AdminIndexViewModel();
             model.PendingAccounts = _pendingAccountsService.Get().Results;
+            model.AspNetUsers = _userManager.Users.ToList();
+            model.Support = _supportService.Get().Results;
 
             return model;
+        }
+        private string GetUsername()
+        {
+            return _httpContextAccessor.HttpContext.User.Identity.ToString();
         }
     }
 }

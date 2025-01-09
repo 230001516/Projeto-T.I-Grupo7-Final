@@ -2,20 +2,40 @@
 
 <h1>Edit</h1>
 
-<a href="@Url.Action("dashboard")">Voltar</a>
+<a href="@Url.Action("table")">Voltar</a>
 
-<form method="post">
+<form asp-action="EditPendAcc" asp-controller="Admin" method="post">
+    @Html.AntiForgeryToken()
 
-    <input asp-for="id_accountPending" type="int" />
+    <div>
+        <label asp-for="id_accountPending"></label>
+        <input asp-for="id_accountPending" />
+        <span asp-validation-for="id_accountPending"></span>
+    </div>
 
-    <input asp-for="id_user" type="text" />
+    <div>
+        <label asp-for="id_user"></label>
+        <input asp-for="id_user" />
+        <span asp-validation-for="id_user"></span>
+    </div>
 
-    <input asp-for="account_state" type="int" />
+    <div>
+        <label asp-for="account_state"></label>
+        <input asp-for="account_state" />
+        <span asp-validation-for="account_state"></span>
+    </div>
 
-    <input asp-for="id_worker" type="text" />
+    <div>
+        <label asp-for="id_worker"></label>
+        <input asp-for="id_worker" />
+        <span asp-validation-for="id_worker"></span>
+    </div>
 
-    <input asp-for="motive" type="text" />
+    <div>
+        <label asp-for="motive"></label>
+        <input asp-for="motive" />
+        <span asp-validation-for="motive"></span>
+    </div>
 
-    <input type="submit" />
-
+    <button type="submit">Save</button>
 </form>
