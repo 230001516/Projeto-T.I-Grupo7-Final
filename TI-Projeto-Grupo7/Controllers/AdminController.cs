@@ -277,7 +277,33 @@ namespace TI_Projeto_Grupo7.Controllers
         }
         private string GetUsername()
         {
-            return _httpContextAccessor.HttpContext.User.Identity.ToString();
+            // Validações intermediárias para depuração
+            if (_httpContextAccessor == null)
+            {
+                throw new NullReferenceException("_httpContextAccessor is null.");
+            }
+
+            if (_httpContextAccessor.HttpContext == null)
+            {
+                throw new NullReferenceException("HttpContext is null.");
+            }
+
+            if (_httpContextAccessor.HttpContext.User == null)
+            {
+                throw new NullReferenceException("HttpContext.User is null.");
+            }
+
+            if (_httpContextAccessor.HttpContext.User.Identity == null)
+            {
+                throw new NullReferenceException("HttpContext.User.Identity is null.");
+            }
+
+            if (!_httpContextAccessor.HttpContext.User.Identity.IsAuthenticated)
+            {
+                throw new Exception("User is not authenticated.");
+            }
+
+            return _httpContextAccessor.HttpContext.User.Identity.Name ?? "Anonymous";
         }
     }
 }
