@@ -39,13 +39,12 @@ a {
     transition: opacity 0.3s ease;
     margin-bottom: 1rem;
     width: fit-content;
-    align-self: flex-start; 
+    align-self: flex-start;
 }
 
     a:hover {
         opacity: 0.8;
     }
-
 
 form {
     background-color: var(--dark-card);
